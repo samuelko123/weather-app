@@ -23,7 +23,7 @@ test('renders correctly', async () => {
 		getByText,
 		queryByA11yLabel,
 	} = render(<App />)
-	await waitForElementToBeRemoved(() => queryByA11yLabel('Loading...'))
+	await waitForElementToBeRemoved(() => queryByA11yLabel('Loading...'), { timeout: 5000 })
 
 	// Assert
 	const elemMin = getByText('22')
