@@ -1,0 +1,25 @@
+name: main-workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+    # Coverage
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+    - name: Install dependencies
+      run: yarn install
+    - name: Run test
+      run: yarn test
+      env:
+        NODE_ENV: test
+    - name: Upload report to codecov
+      run: yarn codecov-upload
