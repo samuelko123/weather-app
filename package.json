@@ -12,6 +12,7 @@
     "lint": "eslint . --fix",
     "pretest": "yarn lint",
     "test": "jest",
+    "prebuild": "yarn test",
     "build": "expo build:web",
     "codecov-upload": "node ./node_modules/.bin/codecov"
   },
