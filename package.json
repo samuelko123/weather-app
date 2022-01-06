@@ -1,0 +1,43 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "lint": "eslint . --fix",
+    "pretest": "yarn lint",
+    "test": "jest",
+    "build": "expo build:web",
+    "codecov-upload": "node ./node_modules/.bin/codecov"
+  },
+  "dependencies": {
+    "expo": "~44.0.0",
+    "expo-status-bar": "~1.2.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-native": "0.64.3",
+    "react-native-web": "0.17.1",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.16.5",
+    "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-native": "^9.0.0",
+    "babel-jest": "^27.4.6",
+    "codecov": "^3.8.3",
+    "eslint": "^8.6.0",
+    "eslint-plugin-import-newlines": "^1.1.7",
+    "eslint-plugin-newline-destructuring": "^1.0.1",
+    "eslint-plugin-react": "^7.28.0",
+    "expo-cli": "^5.0.3",
+    "jest": "^27.4.7",
+    "react-test-renderer": "^17.0.2"
+  }
+}

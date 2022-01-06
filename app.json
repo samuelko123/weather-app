@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "entryPoint": "./src/index.js",
+    "name": "Weather App",
+    "slug": "weather-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#eeeeee"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#eeeeee"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    }
+  }
+}

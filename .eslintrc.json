@@ -1,0 +1,115 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "import-newlines",
+    "newline-destructuring"
+  ],
+  "parser": "@babel/eslint-parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "curly": "error",
+    "eqeqeq": [
+      "error",
+      "always"
+    ],
+    "import-newlines/enforce": [
+      "error",
+      1
+    ],
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "newline-destructuring/newline": [
+      "error",
+      {
+        "items": 1,
+        "itemswithRest": 1
+      }
+    ],
+    "no-console": "warn",
+    "no-multi-spaces": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 0,
+        "maxBOF": 0
+      }
+    ],
+    "no-unused-vars": "warn",
+    "no-var": "error",
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": {
+          "multiline": true,
+          "minProperties": 2,
+          "consistent": true
+        },
+        "ObjectPattern": {
+          "multiline": true,
+          "minProperties": 2,
+          "consistent": true
+        },
+        "ImportDeclaration": {
+          "multiline": true,
+          "minProperties": 2,
+          "consistent": true
+        },
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 2,
+          "consistent": true
+        }
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "object-property-newline": [
+      "error",
+      {
+        "allowAllPropertiesOnSameLine": false
+      }
+    ],
+    "prefer-const": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ]
+  }
+}
