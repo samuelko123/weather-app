@@ -9,6 +9,7 @@ module.exports = {
 	testMatch: [
 		'<rootDir>/__tests__/**/*.test.js',
 	],
+	testTimeout: 10000, // 10s
 	transform: {
 		'^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
 	},
