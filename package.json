@@ -9,9 +9,7 @@
     "pretest": "yarn lint",
     "test": "jest",
     "prebuild": "yarn test",
-    "build": "expo build:web",
-    "upload": "expo publish",
-    "codecov-upload": "node ./node_modules/.bin/codecov"
+    "build": "expo build:web"
   },
   "dependencies": {
     "axios": "^0.24.0",
