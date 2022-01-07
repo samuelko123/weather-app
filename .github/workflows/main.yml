@@ -23,3 +23,5 @@ jobs:
         NODE_ENV: test
     - name: Upload report to codecov
       run: yarn codecov-upload
+    - name: Publish to Expo
+      run: yarn upload
