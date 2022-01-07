@@ -23,5 +23,11 @@ jobs:
         NODE_ENV: test
     - name: Upload report to codecov
       run: yarn codecov-upload
+    
+    # Expo Publish
+    - uses: expo/expo-github-action@v6
+      with:
+        expo-version: 4.x
+        token: ${{ secrets.EXPO_TOKEN }}
     - name: Publish to Expo
-      run: yarn upload
+      run: expo publish
