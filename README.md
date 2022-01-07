@@ -5,5 +5,6 @@
 ![licence badge](https://img.shields.io/github/license/samuelko123/weather-app)
 
 <p>A React Native app, built with Expo and styled-components.</p>
-<p>Demo: https://weather-app-samuelko.vercel.app/</p>
+<p>Web Demo: https://weather-app-samuelko.vercel.app/</p>
+<p>Expo Demo: <exp://exp.host/@samuelko123/weather-app/></p>
 <p>Backend: https://github.com/samuelko123/weather-api/</p>
