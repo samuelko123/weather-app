@@ -1,9 +1,10 @@
 {
   "expo": {
-    "entryPoint": "./src/index.js",
     "name": "Weather App",
     "slug": "weather-app",
     "version": "1.0.0",
+    "owner": "samuelko123",
+    "entryPoint": "./src/index.js",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "splash": {
