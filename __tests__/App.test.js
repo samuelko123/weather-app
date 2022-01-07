@@ -6,16 +6,16 @@ import {
 	waitForElementToBeRemoved,
 } from '@testing-library/react-native'
 import { act } from 'react-test-renderer'
+import axios from 'axios'
 
 test('renders correctly', async () => {
 	// Arrange
-	global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-		json: () =>
-			Promise.resolve([{
-				dt: 1000000000,
-				min: 22.01,
-				max: 30.99,
-			}]),
+	jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({
+		data: [{
+			dt: 1000000000,
+			min: 22.01,
+			max: 30.99,
+		}],
 	}))
 
 	// Act
@@ -35,13 +35,12 @@ test('renders correctly', async () => {
 
 test('button click', async () => {
 	// Arrange
-	global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-		json: () =>
-			Promise.resolve([{
-				dt: 1000000000,
-				min: 22.01,
-				max: 30.99,
-			}]),
+	jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({
+		data: [{
+			dt: 1000000000,
+			min: 22.01,
+			max: 30.99,
+		}],
 	}))
 	const {
 		getByText,
@@ -70,7 +69,7 @@ test('button click', async () => {
 test('error handling', async () => {
 	// Arrange
 	const errorMsg = 'API is down'
-	global.fetch = jest.fn().mockImplementation(() => Promise.reject(errorMsg))
+	jest.spyOn(axios, 'get').mockImplementation(() => Promise.reject(errorMsg))
 
 	// Act
 	const {

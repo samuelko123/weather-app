@@ -3,7 +3,7 @@ import React, {
 	useState,
 } from 'react'
 import styled, { ThemeProvider } from 'styled-components/native'
-import { useFonts } from 'expo-font'
+import axios from 'axios'
 import {
 	BaseBackground,
 	BaseText,
@@ -48,22 +48,13 @@ export const App = () => {
 	const [data, setData] = useState([])
 	const [errorMsg, setErrorMsg] = useState(null)
 	const [city, setCity] = useState('VIC')
-	const [fontLoaded] = useFonts({
-		Segoe: require('./assets/Segoe.ttf'),
-	})
-	const isFontLoading = !fontLoaded
 
 	const fetchWeatherData = async () => {
 		try {
 			setLoading(true)
-			// const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/${city}`
-			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/abc`
-			const res = await fetch(url)
-			if (res.status >= 400) {
-				throw new Error(res.status)
-			}
-			const json = await res.json()
-			setData(json)
+			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/${city}`
+			const res = await axios.get(url)
+			setData(res.data)
 		} catch (error) {
 			setErrorMsg(error.toString())
 		} finally {
@@ -106,11 +97,11 @@ export const App = () => {
                             <ErrorAlert>{errorMsg}</ErrorAlert>
 						}
 						{
-							(isLoading || isFontLoading) &&
+							isLoading &&
                             <Spinner />
 						}
 						{
-							!errorMsg && !isLoading && !isFontLoading &&
+							!errorMsg && !isLoading &&
                             <WeatherList data={data} />
 						}
 					</Main>

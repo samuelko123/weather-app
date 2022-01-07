@@ -3,7 +3,8 @@ module.exports = {
 	collectCoverage: true,
 	coverageDirectory: 'coverage',
 	maxWorkers: '50%',
-	preset: 'react-native',
+	// preset: 'react-native',
+	preset: 'jest-expo',
 	setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 	testEnvironment: 'jest-environment-jsdom',
 	testMatch: [

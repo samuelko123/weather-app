@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "start": "expo start --dev --tunnel --ios",
-
     "lint": "eslint . --fix",
     "pretest": "yarn lint",
     "test": "jest",
@@ -15,9 +14,11 @@
     "codecov-upload": "node ./node_modules/.bin/codecov"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
+    "jest-expo": "^44.0.1",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
