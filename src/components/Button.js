@@ -3,8 +3,8 @@ import styled from 'styled-components/native'
 import { BaseText } from './BaseText'
 
 const ButtonContainer = styled.Pressable`
-    height: 1rem;
-    padding: 1rem;
+	height: 12px;
+	padding: 12px;
     background-color: ${props => props.backgroundColor};
     border: 2px solid ${props => props.borderColor};
     border-radius: 24px;
@@ -13,7 +13,9 @@ const ButtonContainer = styled.Pressable`
 
 const ButtonText = styled(BaseText)`
     color: ${props => props.textColor};
-    text-align: center;
+	text-align: center;
+	font-weight: bold;
+	height: 16px;
 `
 
 export const Button = (props) => {

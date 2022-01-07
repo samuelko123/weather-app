@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { FlatList } from 'react-native'
-import { WeatherRow } from './index'
+import { WeatherRow } from './WeatherRow'
 
 export const WeatherList = (props) => {
 	const { data } = props

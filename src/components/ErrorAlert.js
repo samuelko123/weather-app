@@ -4,9 +4,9 @@ import { BaseText } from './BaseText'
 
 export const Container = styled.View`
     background-color: ${props => props.theme.errorBackground};
-    padding: 0.75rem 1.25rem;
+    padding: 12px 12px;
     border: 1px solid ${props => props.theme.errorBorder};
-    border-radius: 24px;
+    border-radius: 6px;
 `
 
 export const StyledText = styled(BaseText)`

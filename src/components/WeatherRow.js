@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { BaseText } from './index'
+import { BaseText } from './BaseText'
 
 const Container = styled.View`
     flex-direction: row;
     justify-content: flex-start;
     align-items: baseline;
-    height: 3rem;    
+    height: 36px;    
 `
 
 const DateText = styled(BaseText)`

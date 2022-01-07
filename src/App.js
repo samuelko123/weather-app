@@ -3,6 +3,7 @@ import React, {
 	useState,
 } from 'react'
 import styled, { ThemeProvider } from 'styled-components/native'
+import { useFonts } from 'expo-font'
 import {
 	BaseBackground,
 	BaseText,
@@ -16,11 +17,11 @@ import { theme } from './styles'
 
 const Header = styled.View`
     background-color: ${props => props.theme.brand};
-    height: 4rem;
+    height: 72px;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 24px;
     flex-direction: row;
-    padding: 0 2rem;
+    padding: 0 24px;
 `
 
 const TitleContainer = styled.View`
@@ -29,6 +30,7 @@ const TitleContainer = styled.View`
 
 const Title = styled(BaseText)`
     color: ${props => props.theme.brandText};
+	font-size: 24px;
     font-weight: bold;
 `
 
@@ -37,7 +39,7 @@ const ButtonContainer = styled.View`
 `
 
 const Main = styled.View`
-    padding: 0 2rem;
+    padding: 0 24px;
     flex: 1;
 `
 
@@ -46,12 +48,20 @@ export const App = () => {
 	const [data, setData] = useState([])
 	const [errorMsg, setErrorMsg] = useState(null)
 	const [city, setCity] = useState('VIC')
+	const [fontLoaded] = useFonts({
+		Segoe: require('./assets/Segoe.ttf'),
+	})
+	const isFontLoading = !fontLoaded
 
 	const fetchWeatherData = async () => {
 		try {
 			setLoading(true)
-			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/${city}`
+			// const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/${city}`
+			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/abc`
 			const res = await fetch(url)
+			if (res.status >= 400) {
+				throw new Error(res.status)
+			}
 			const json = await res.json()
 			setData(json)
 		} catch (error) {
@@ -96,11 +106,11 @@ export const App = () => {
                             <ErrorAlert>{errorMsg}</ErrorAlert>
 						}
 						{
-							isLoading &&
+							(isLoading || isFontLoading) &&
                             <Spinner />
 						}
 						{
-							!errorMsg && !isLoading &&
+							!errorMsg && !isLoading && !isFontLoading &&
                             <WeatherList data={data} />
 						}
 					</Main>
