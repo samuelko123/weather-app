@@ -22,7 +22,7 @@ jobs:
       env:
         NODE_ENV: test
     - name: Upload report to codecov
-      run: yarn codecov-upload
+      run: node ./node_modules/.bin/codecov
     
     # Expo Publish
     - uses: expo/expo-github-action@v6
