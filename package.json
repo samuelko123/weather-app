@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "expo start --dev --tunnel --ios",
+    "dev": "expo start --dev --tunnel --ios",
     "lint": "eslint . --fix",
     "pretest": "yarn lint",
     "test": "jest",

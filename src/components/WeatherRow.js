@@ -2,11 +2,10 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { BaseText } from './BaseText'
 
-const Container = styled.View`
+const Row = styled.View`
+	height: ${props => props.theme.height.row}px;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: baseline;
-    height: 36px;    
 `
 
 const DateText = styled(BaseText)`
@@ -14,13 +13,13 @@ const DateText = styled(BaseText)`
 `
 
 const MinTempText = styled(BaseText)`
-    color: ${props => props.theme.minTemp};
+    color: ${props => props.theme.color.minTemp};
     text-align: right;
     flex: 1;
 `
 
 const MaxTempText = styled(BaseText)`
-    color: ${props => props.theme.maxTemp};
+    color: ${props => props.theme.color.maxTemp};
     text-align: right;
     flex: 1;
 `
@@ -33,10 +32,10 @@ export const WeatherRow = (props) => {
 	} = props
 
 	return (
-		<Container>
+		<Row>
 			<DateText>{date}</DateText>
 			<MinTempText>{min}</MinTempText>
 			<MaxTempText>{max}</MaxTempText>
-		</Container>
+		</Row>
 	)
 }

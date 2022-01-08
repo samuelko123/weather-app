@@ -1,9 +1,13 @@
 import React from 'react'
-import { Button } from '../../src/components'
+import {
+	Button,
+	Layout,
+} from '../../src/components'
 import {
 	fireEvent,
 	render,
 } from '@testing-library/react-native'
+import { theme } from '../../src/styles'
 
 test('renders correctly', async () => {
 	// Arrange
@@ -12,11 +16,13 @@ test('renders correctly', async () => {
 	const fillColor = '#ffffff'
 
 	const { getByText } = render(
-		<Button
-			text={text}
-			textColor={textColor}
-			fillColor={fillColor}
-		/>
+		<Layout theme={theme}>
+			<Button
+				text={text}
+				textColor={textColor}
+				fillColor={fillColor}
+			/>
+		</Layout>
 	)
 
 	const btn = getByText(text)

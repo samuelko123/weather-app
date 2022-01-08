@@ -2,45 +2,36 @@ import React, {
 	useEffect,
 	useState,
 } from 'react'
-import styled, { ThemeProvider } from 'styled-components/native'
+import styled from 'styled-components/native'
 import axios from 'axios'
 import {
-	BaseBackground,
 	BaseText,
 	Button,
 	ErrorAlert,
-	IosBackground,
+	Layout,
 	Spinner,
 	WeatherList,
 } from './components'
 import { theme } from './styles'
 
 const Header = styled.View`
-    background-color: ${props => props.theme.brand};
-    height: 72px;
+    background-color: ${props => props.theme.color.brand};
+    height: ${props => props.theme.height.header}px;
+	padding: 0 ${props => props.theme.padding.header}px;
+	flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 24px;
-    flex-direction: row;
-    padding: 0 24px;
-`
-
-const TitleContainer = styled.View`
-    justify-content: center;
-`
-
-const Title = styled(BaseText)`
-    color: ${props => props.theme.brandText};
-	font-size: 24px;
-    font-weight: bold;
-`
-
-const ButtonContainer = styled.View`
-    justify-content: center;
+	align-items: center;
 `
 
 const Main = styled.View`
-    padding: 0 24px;
-    flex: 1;
+    padding: ${props => props.theme.padding.main}px;
+	flex: 1;
+`
+
+const Title = styled(BaseText)`
+    color: ${props => props.theme.color.brandText};
+	font-size: ${props => props.theme.fontSize.title}px;
+    font-weight: bold;
 `
 
 export const App = () => {
@@ -63,7 +54,7 @@ export const App = () => {
 	}
 
 	const selectCity = () => {
-		if(city === 'VIC'){
+		if (city === 'VIC') {
 			setCity('WA')
 		} else {
 			setCity('VIC')
@@ -75,38 +66,30 @@ export const App = () => {
 	}, [city])
 
 	return (
-		<ThemeProvider theme={theme}>
-			<IosBackground>
-				<BaseBackground>
-					<Header>
-						<TitleContainer>
-							<Title>Weather App</Title>
-						</TitleContainer>
-						<ButtonContainer>
-							<Button
-								text={city}
-								onPress={selectCity}
-								textColor={theme.brandText}
-								fillColor={theme.brand}
-							/>
-						</ButtonContainer>
-					</Header>
-					<Main>
-						{
-							errorMsg &&
-                            <ErrorAlert>{errorMsg}</ErrorAlert>
-						}
-						{
-							isLoading &&
-                            <Spinner />
-						}
-						{
-							!errorMsg && !isLoading &&
-                            <WeatherList data={data} />
-						}
-					</Main>
-				</BaseBackground>
-			</IosBackground>
-		</ThemeProvider>
+		<Layout theme={theme}>
+			<Header>
+				<Title>Weather App</Title>
+				<Button
+					text={city}
+					onPress={selectCity}
+					textColor={theme.color.brandText}
+					fillColor={theme.color.brand}
+				/>
+			</Header>
+			<Main>
+				{
+					errorMsg &&
+					<ErrorAlert>{errorMsg}</ErrorAlert>
+				}
+				{
+					isLoading &&
+					<Spinner />
+				}
+				{
+					!errorMsg && !isLoading &&
+					<WeatherList data={data} />
+				}
+			</Main>
+		</Layout>
 	)
 }
