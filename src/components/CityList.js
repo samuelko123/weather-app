@@ -4,9 +4,9 @@ import {
 	FlatList,
 	Pressable,
 } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
 import { BaseText } from './BaseText'
 import { Row } from './Row'
+import { RightArrowIcon } from './RightArrowIcon'
 
 const Separator = styled.View`
 	border-bottom-color: ${props => props.theme.color.separator};
@@ -16,12 +16,6 @@ const Separator = styled.View`
 const CityRow = styled(Row)`
 	justify-content: space-between;
 `
-
-const RightArrow = styled(AntDesign).attrs(props => ({
-	name: 'right',
-	color: props.theme.color.brand,
-	size: props.theme.fontSize.icon,
-}))``
 
 export const CityList = (props) => {
 	const {
@@ -44,7 +38,7 @@ export const CityList = (props) => {
 				>
 					<CityRow>
 						<BaseText>{item.name}</BaseText>
-						<RightArrow />
+						<RightArrowIcon />
 					</CityRow>
 				</Pressable>
 			)}

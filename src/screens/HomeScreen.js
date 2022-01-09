@@ -8,30 +8,13 @@ import {
 	BaseText,
 	Button,
 	ErrorAlert,
+	Header,
+	Main,
 	Spinner,
+	Title,
 	WeatherList,
 } from '../components'
 import { theme } from '../styles'
-
-const Header = styled.View`
-    background-color: ${props => props.theme.color.brand};
-    height: ${props => props.theme.height.header}px;
-	padding: 0 ${props => props.theme.padding.header}px;
-	flex-direction: row;
-    justify-content: space-between;
-	align-items: center;
-`
-
-const Main = styled.View`
-    padding: ${props => props.theme.padding.main}px;
-	flex: 1;
-`
-
-const Title = styled(BaseText)`
-    color: ${props => props.theme.color.brandText};
-	font-size: ${props => props.theme.fontSize.title}px;
-    font-weight: bold;
-`
 
 export const HomeScreen = (props) => {
 	const {

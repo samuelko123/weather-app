@@ -12,5 +12,4 @@ export const Spinner = styled.ActivityIndicator.attrs(props => ({
     bottom: 0;
     justify-content: center;
     align-items: center;
-    
 `
