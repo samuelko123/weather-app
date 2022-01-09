@@ -8,10 +8,11 @@ export const theme = {
 		errorBackground: '#ffdddd',
 		errorText: '#bb0000',
 		errorBorder: '#bb0000',
+		separator: '#cccccc',
 	},
 	height: {
 		header: 72,
-		row: 36,
+		row: 48,
 	},
 	padding: {
 		header: 24,
@@ -20,13 +21,14 @@ export const theme = {
 		alert: 12,
 	},
 	fontSize: {
-		base: 12,
+		base: 18,
 		title: 24,
 		button: 18,
 	},
 	border: {
 		button: 2,
 		alert: 1,
+		separator: 1,
 	},
 	borderRadius: {
 		button: 12,

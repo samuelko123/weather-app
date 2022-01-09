@@ -26,44 +26,39 @@ test('renders correctly', async () => {
 	await waitForElementToBeRemoved(() => queryByA11yLabel('Loading...'), { timeout: 5000 })
 
 	// Assert
-	const elemMin = getByText('22')
-	await expect(elemMin).toBeTruthy()
+	await expect(getByText('22')).toBeTruthy()
+	await expect(getByText('31')).toBeTruthy()
 
-	const elemMax = getByText('31')
-	await expect(elemMax).toBeTruthy()
-})
-
-test('button click', async () => {
-	// Arrange
-	jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({
-		data: [{
-			dt: 1000000000,
-			min: 22.01,
-			max: 30.99,
-		}],
-	}))
-	const {
-		getByText,
-		queryByA11yLabel,
-	} = render(<App />)
-	await waitForElementToBeRemoved(() => queryByA11yLabel('Loading...'))
+	// Act
 	const btn = getByText('VIC')
+	await act(async () => {
+		fireEvent.press(btn)
+	})
+
+	// Assert
+	expect(getByText('Select City')).toBeTruthy()
+
+	// Act
+	const btnWA = getByText('WA')
+	await act(async () => {
+		fireEvent.press(btnWA)
+	})
+
+	// Assert
+	expect(getByText('Weather App')).toBeTruthy()
 
 	// Act
 	await act(async () => {
 		fireEvent.press(btn)
 	})
 
-	// Assert
-	await expect(btn).toHaveTextContent('WA')
-
-	// Act
+	const btnBack = getByText('Go Back')
 	await act(async () => {
-		fireEvent.press(btn)
+		fireEvent.press(btnBack)
 	})
 
 	// Assert
-	await expect(btn).toHaveTextContent('VIC')
+	expect(getByText('Weather App')).toBeTruthy()
 })
 
 test('error handling', async () => {

@@ -1,7 +1,25 @@
 import React from 'react'
+import styled from 'styled-components/native'
 import moment from 'moment'
 import { FlatList } from 'react-native'
-import { WeatherRow } from './WeatherRow'
+import { BaseText } from './BaseText'
+import { Row } from './Row'
+
+const DateText = styled(BaseText)`
+    flex: 1;
+`
+
+const MinTempText = styled(BaseText)`
+    color: ${props => props.theme.color.minTemp};
+    text-align: right;
+    flex: 1;
+`
+
+const MaxTempText = styled(BaseText)`
+    color: ${props => props.theme.color.maxTemp};
+    text-align: right;
+    flex: 1;
+`
 
 export const WeatherList = (props) => {
 	const { data } = props
@@ -11,19 +29,12 @@ export const WeatherList = (props) => {
 			data={data}
 			keyExtractor={(item) => item.dt}
 			renderItem={({ item }) => (
-				<WeatherRow
-					date={moment.unix(item.dt).format('DD/MM ddd')}
-					min={Math.round(item.min)}
-					max={Math.round(item.max)}
-				/>
+				<Row>
+					<DateText>{moment.unix(item.dt).format('DD/MM ddd')}</DateText>
+					<MinTempText>{Math.round(item.min)}</MinTempText>
+					<MaxTempText>{Math.round(item.max)}</MaxTempText>
+				</Row>
 			)}
-			ListHeaderComponent={
-				<WeatherRow
-					date='Date'
-					min='Min'
-					max='Max'
-				/>
-			}
 		/>
 	)
 }
