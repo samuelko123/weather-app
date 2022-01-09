@@ -5,4 +5,5 @@
 
 <p>A React Native app, built with Expo and styled-components.</p>
 <p>Expo Demo: https://expo.dev/@samuelko123/weather-app/</p>
+<p>Web Demo: https://weather-app-samuelko.vercel.app/</p>
 <p>Back End: https://github.com/samuelko123/weather-api/</p>
