@@ -1,10 +1,11 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components/native'
 import { SafeAreaView } from 'react-native'
+import { Dimensions } from 'react-native'
 
 const RootContainer = styled.View`
 	background-color: ${props => props.theme.color.background};
-	min-height: 100%;
+	min-height: ${Dimensions.get('window').height}px;
     flex-direction: column;
 `
 
