@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import { Pressable } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 import {
 	BaseText,
-	Button,
 	CityList,
 } from '../components'
-import { theme } from '../styles'
 
 const Header = styled.View`
     background-color: ${props => props.theme.color.brand};
@@ -26,6 +26,13 @@ const Title = styled(BaseText)`
 	font-size: ${props => props.theme.fontSize.title}px;
     font-weight: bold;
 `
+
+const CloseIcon = styled(AntDesign).attrs(props => ({
+	name: 'close',
+	color: props.theme.color.brandText,
+	size: props.theme.fontSize.icon,
+	accessibilityLabel: 'Close',
+}))``
 
 export const SelectCityScreen = (props) => {
 	const { navigation } = props
@@ -50,12 +57,9 @@ export const SelectCityScreen = (props) => {
 		<>
 			<Header>
 				<Title>Select City</Title>
-				<Button
-					text='Go Back'
-					onPress={() => navigation.navigate('Home')}
-					textColor={theme.color.brandText}
-					fillColor={theme.color.brand}
-				/>
+				<Pressable onPress={() => navigation.navigate('Home')}>
+					<CloseIcon />
+				</Pressable>
 			</Header>
 			<Main>
 				<CityList

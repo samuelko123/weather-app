@@ -24,6 +24,7 @@ export const theme = {
 		base: 18,
 		title: 24,
 		button: 18,
+		icon: 24,
 	},
 	border: {
 		button: 2,

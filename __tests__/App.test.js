@@ -21,6 +21,7 @@ test('renders correctly', async () => {
 	// Act
 	const {
 		getByText,
+		getByA11yLabel,
 		queryByA11yLabel,
 	} = render(<App />)
 	await waitForElementToBeRemoved(() => queryByA11yLabel('Loading...'), { timeout: 5000 })
@@ -52,9 +53,9 @@ test('renders correctly', async () => {
 		fireEvent.press(btn)
 	})
 
-	const btnBack = getByText('Go Back')
+	const btnClose = getByA11yLabel('Close')
 	await act(async () => {
-		fireEvent.press(btnBack)
+		fireEvent.press(btnClose)
 	})
 
 	// Assert
