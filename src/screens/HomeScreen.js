@@ -2,6 +2,7 @@ import React, {
 	useEffect,
 	useState,
 } from 'react'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 import {
 	Button,
@@ -15,14 +16,12 @@ import {
 import { theme } from '../styles'
 
 export const HomeScreen = (props) => {
-	const {
-		navigation,
-		route,
-	} = props
+	const { navigation } = props
+
+	const city = useSelector(state => state.city.name)
 	const [isLoading, setLoading] = useState(true)
 	const [data, setData] = useState([])
 	const [errorMsg, setErrorMsg] = useState(null)
-	const [city, setCity] = useState('VIC')
 
 	const fetchWeatherData = async () => {
 		try {
@@ -38,11 +37,8 @@ export const HomeScreen = (props) => {
 	}
 
 	useEffect(() => {
-		if (route.params?.city) {
-			setCity(route.params.city)
-		}
 		fetchWeatherData()
-	}, [city, route.params?.city])
+	}, [city])
 
 	return (
 		<>

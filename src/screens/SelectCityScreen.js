@@ -1,5 +1,7 @@
 import React from 'react'
 import { Pressable } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { setCity } from '../redux/slices'
 import {
 	CityList,
 	CloseIcon,
@@ -9,6 +11,7 @@ import {
 } from '../components'
 
 export const SelectCityScreen = (props) => {
+
 	const { navigation } = props
 	const data = [
 		{ name: 'ACT' },
@@ -21,10 +24,10 @@ export const SelectCityScreen = (props) => {
 		{ name: 'WA' },
 	]
 
+	const dispatch = useDispatch()
 	const handleSelectCity = (city) => {
-		navigation.navigate('Home', {
-			city: city,
-		})
+		dispatch(setCity(city))
+		navigation.navigate('Home')
 	}
 
 	return (
