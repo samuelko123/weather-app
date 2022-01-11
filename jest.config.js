@@ -4,7 +4,7 @@ module.exports = {
 	coverageDirectory: 'coverage',
 	maxWorkers: '50%',
 	preset: 'jest-expo',
-	setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+	setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 	testEnvironment: 'jest-environment-jsdom',
 	testMatch: [
 		'<rootDir>/__tests__/**/*.test.js',
