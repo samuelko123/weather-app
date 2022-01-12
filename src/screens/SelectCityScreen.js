@@ -1,18 +1,43 @@
 import React from 'react'
-import { Pressable } from 'react-native'
-import { useDispatch } from 'react-redux'
+import styled from 'styled-components/native'
+import {
+	FlatList,
+	Pressable,
+} from 'react-native'
+import {
+	shallowEqual,
+	useDispatch,
+	useSelector,
+} from 'react-redux'
 import { setCity } from '../redux/slices'
 import {
-	CityList,
+	BaseText,
 	CloseIcon,
 	Header,
 	Main,
+	RightArrowIcon,
+	Row,
 	Title,
 } from '../components'
 
-export const SelectCityScreen = (props) => {
+const Separator = styled.View`
+	border-bottom-color: ${props => props.theme.color.separator};
+	border-bottom-width: ${props => props.theme.border.separator}px;
+`
 
+const CityRow = styled(Row)`
+	justify-content: space-between;
+`
+
+const CityText = styled(BaseText)`
+	${props => props.highlighted && 'font-weight: bold;'}
+	${props => props.highlighted && `color: ${props.theme.color.brand}`}
+`
+
+export const SelectCityScreen = (props) => {
 	const { navigation } = props
+	const city = useSelector(state => state.city.name, shallowEqual)
+	const dispatch = useDispatch()
 	const data = [
 		{ name: 'ACT' },
 		{ name: 'NSW' },
@@ -24,9 +49,8 @@ export const SelectCityScreen = (props) => {
 		{ name: 'WA' },
 	]
 
-	const dispatch = useDispatch()
-	const handleSelectCity = (city) => {
-		dispatch(setCity(city))
+	const handlePress = (item) => {
+		dispatch(setCity(item.name))
 		navigation.navigate('Home')
 	}
 
@@ -39,9 +63,25 @@ export const SelectCityScreen = (props) => {
 				</Pressable>
 			</Header>
 			<Main>
-				<CityList
+				<FlatList
 					data={data}
-					onSelectCity={handleSelectCity}
+					keyExtractor={(item) => item.name}
+					renderItem={({ item }) => (
+
+						<Pressable
+							onPress={() => handlePress(item)}
+						>
+							<CityRow>
+								<CityText highlighted={item.name === city}>
+									{item.name}
+								</CityText>
+								<RightArrowIcon />
+							</CityRow>
+						</Pressable>
+					)}
+					ItemSeparatorComponent={() => (
+						<Separator />
+					)}
 				/>
 			</Main>
 		</>
