@@ -6,19 +6,28 @@ import {
 	useSelector,
 } from 'react-redux'
 import moment from 'moment'
-
 import { useSevenDayForecast } from '../hooks'
+
 import {
 	BaseText,
-	Button,
 	ErrorAlert,
 	Header,
 	Main,
 	Row,
+	SearchIcon,
 	Spinner,
 	Title,
 } from '../components'
-import { theme } from '../styles'
+
+const StyledButton = styled.Pressable`
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+`
+
+const StyledTitle = styled(Title)`
+	margin-left: 6px;
+`
 
 const DateText = styled(BaseText)`
     flex: 1;
@@ -39,19 +48,16 @@ const MaxTempText = styled(BaseText)`
 export const HomeScreen = (props) => {
 	const { navigation } = props
 
-	const city = useSelector(state => state.city.name, shallowEqual)
-	const [isLoading, data, errorMsg] = useSevenDayForecast(city)
+	const city = useSelector(state => state.city, shallowEqual)
+	const [isLoading, data, errorMsg] = useSevenDayForecast(city.lat, city.lon)
 
 	return (
 		<>
 			<Header>
-				<Title>Weather App</Title>
-				<Button
-					text={city}
-					onPress={() => navigation.navigate('Select City')}
-					textColor={theme.color.brandText}
-					fillColor={theme.color.brand}
-				/>
+				<StyledButton onPress={() => navigation.navigate('Select City')}>
+					<SearchIcon />
+					<StyledTitle>{city.name}</StyledTitle>
+				</StyledButton>
 			</Header>
 			<Main>
 				{

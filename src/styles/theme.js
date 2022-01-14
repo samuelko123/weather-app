@@ -34,5 +34,6 @@ export const theme = {
 	borderRadius: {
 		button: 12,
 		alert: 6,
+		textField: 3,
 	},
 }

@@ -42,6 +42,5 @@ export const App = () => {
 				</Layout>
 			</PersistGate>
 		</Provider>
-
 	)
 }

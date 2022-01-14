@@ -1,24 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import {
 	FlatList,
 	Pressable,
 } from 'react-native'
-import {
-	shallowEqual,
-	useDispatch,
-	useSelector,
-} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setCity } from '../redux/slices'
+import { useCitySearch } from '../hooks'
 import {
 	BaseText,
 	CloseIcon,
+	ErrorAlert,
 	Header,
 	Main,
 	RightArrowIcon,
 	Row,
-	Title,
+	Spinner,
 } from '../components'
+
+const SearchBar = styled.TextInput`
+	margin-right: 12px;
+	flex: 1;
+	font-size: 18px;
+	padding: 6px;
+	color: ${props => props.theme.color.brandText};
+	border-bottom-width: 1px;
+    border-radius: ${props => props.theme.borderRadius.textField}px;
+    border-color: ${props => props.theme.color.brandText};
+`
 
 const Separator = styled.View`
 	border-bottom-color: ${props => props.theme.color.separator};
@@ -29,60 +38,68 @@ const CityRow = styled(Row)`
 	justify-content: space-between;
 `
 
-const CityText = styled(BaseText)`
-	${props => props.highlighted && 'font-weight: bold;'}
-	${props => props.highlighted && `color: ${props.theme.color.brand}`}
-`
-
 export const SelectCityScreen = (props) => {
 	const { navigation } = props
-	const city = useSelector(state => state.city.name, shallowEqual)
+	const [keyword, setKeyword] = useState('')
+	const [isLoading, data, errorMsg] = useCitySearch(keyword)
 	const dispatch = useDispatch()
-	const data = [
-		{ name: 'ACT' },
-		{ name: 'NSW' },
-		{ name: 'NT' },
-		{ name: 'QLD' },
-		{ name: 'SA' },
-		{ name: 'TAS' },
-		{ name: 'VIC' },
-		{ name: 'WA' },
-	]
 
+	const handleChange = (text) => setKeyword(text)
 	const handlePress = (item) => {
-		dispatch(setCity(item.name))
+		dispatch(setCity(item))
 		navigation.navigate('Home')
 	}
 
 	return (
 		<>
 			<Header>
-				<Title>Select City</Title>
+				<SearchBar
+					value={keyword}
+					onChangeText={handleChange}
+					autoFocus={true}
+					placeholder='Search'
+				/>
 				<Pressable onPress={() => navigation.navigate('Home')}>
 					<CloseIcon />
 				</Pressable>
 			</Header>
 			<Main>
-				<FlatList
-					data={data}
-					keyExtractor={(item) => item.name}
-					renderItem={({ item }) => (
-
-						<Pressable
-							onPress={() => handlePress(item)}
-						>
-							<CityRow>
-								<CityText highlighted={item.name === city}>
-									{item.name}
-								</CityText>
-								<RightArrowIcon />
-							</CityRow>
-						</Pressable>
-					)}
-					ItemSeparatorComponent={() => (
-						<Separator />
-					)}
-				/>
+				{
+					errorMsg &&
+					<ErrorAlert>{errorMsg}</ErrorAlert>
+				}
+				{
+					isLoading &&
+					<Spinner />
+				}
+				{
+					!errorMsg && !isLoading && (data.length === 0) &&
+					<BaseText>
+						No results found
+					</BaseText>
+				}
+				{
+					!errorMsg && !isLoading && (data.length > 0) &&
+					<FlatList
+						data={data}
+						keyExtractor={(item, index) => index}
+						renderItem={({ item }) => (
+							<Pressable
+								onPress={() => handlePress(item)}
+							>
+								<CityRow>
+									<BaseText>
+										{item.name}
+									</BaseText>
+									<RightArrowIcon />
+								</CityRow>
+							</Pressable>
+						)}
+						ItemSeparatorComponent={() => (
+							<Separator />
+						)}
+					/>
+				}
 			</Main>
 		</>
 	)

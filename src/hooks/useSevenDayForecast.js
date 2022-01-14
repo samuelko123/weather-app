@@ -4,15 +4,15 @@ import {
 } from 'react'
 import axios from 'axios'
 
-export const useSevenDayForecast = (city) => {
+export const useSevenDayForecast = (lat, lon) => {
 	const [isLoading, setIsLoading] = useState(true)
-	const [data, setData] = useState(null)
+	const [data, setData] = useState([])
 	const [errorMsg, setErrorMsg] = useState(null)
 
 	const fetchData = async () => {
 		try {
 			setIsLoading(true)
-			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast/${city}`
+			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast?lat=${lat}&lon=${lon}`
 			const res = await axios.get(url)
 			setData(res.data)
 		} catch (err) {
@@ -24,7 +24,7 @@ export const useSevenDayForecast = (city) => {
 
 	useEffect(() => {
 		fetchData()
-	}, [city])
+	}, [lat, lon])
 
 	return [isLoading, data, errorMsg]
 }

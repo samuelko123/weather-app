@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 const citySlice = createSlice({
 	name: 'city',
 	initialState: {
-		name: 'VIC',
+		name: 'Melbourne',
+		lat: -37.820555555,
+		lon: 144.961388888,
 	},
 	reducers: {
 		setCity: (state, action) => {
-			state.name = action.payload
+			return { ...action.payload }
 		},
 	},
 })
