@@ -45,8 +45,8 @@ export const App = () => {
 						name="Select City"
 						component={SelectCityScreen}
 						options={{
-							gestureEnabled: true,
 							gestureDirection: 'vertical',
+							gestureEnabled: true,
 						}}
 					/>
 				</Stack.Navigator>

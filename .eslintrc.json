@@ -11,7 +11,8 @@
   ],
   "plugins": [
     "import-newlines",
-    "newline-destructuring"
+    "newline-destructuring",
+    "sort-keys-fix"
   ],
   "parser": "@babel/eslint-parser",
   "settings": {
@@ -110,6 +111,9 @@
       {
         "ignoreDeclarationSort": true
       }
-    ]
+    ],
+    "sort-keys-fix/sort-keys-fix": ["error", "asc", {
+      "natural": true
+    }]
   }
 }

@@ -18,13 +18,13 @@ describe('happy path', () => {
 		jest.spyOn(axios, 'get').mockImplementation(() => {
 			return Promise.resolve({
 				data: [{
+					lat: -37,
+					lon: 144,
 					name: 'Melbourne',
-					lat: -37,
-					lon: 144,
 				}, {
-					name: 'Melbourne Airport',
 					lat: -37,
 					lon: 144,
+					name: 'Melbourne Airport',
 				}],
 			})
 		})
