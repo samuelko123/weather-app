@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import {
 	FlatList,
+	Keyboard,
 	Pressable,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
+
 import { setCity } from '../redux/slices'
 import { useCitySearch } from '../hooks'
 import {
@@ -15,27 +17,17 @@ import {
 	Main,
 	RightArrowIcon,
 	Row,
+	Separator,
 	Spinner,
+	TextField,
 } from '../components'
 
-const SearchBar = styled.TextInput`
-	margin-right: 12px;
+const StyledTextField = styled(TextField)`
 	flex: 1;
-	font-size: 18px;
-	padding: 6px;
-	color: ${props => props.theme.color.brandText};
-	border-bottom-width: 1px;
-    border-radius: ${props => props.theme.borderRadius.textField}px;
-    border-color: ${props => props.theme.color.brandText};
 `
 
-const Separator = styled.View`
-	border-bottom-color: ${props => props.theme.color.separator};
-	border-bottom-width: ${props => props.theme.border.separator}px;
-`
-
-const CityRow = styled(Row)`
-	justify-content: space-between;
+const StyledCloseIcon = styled(CloseIcon)`
+	margin-left: ${props => props.theme.margin.icon}px;
 `
 
 export const SelectCityScreen = (props) => {
@@ -53,17 +45,17 @@ export const SelectCityScreen = (props) => {
 	return (
 		<>
 			<Header>
-				<SearchBar
+				<StyledTextField
 					value={keyword}
 					onChangeText={handleChange}
 					autoFocus={true}
 					placeholder='Search'
 				/>
 				<Pressable onPress={() => navigation.navigate('Home')}>
-					<CloseIcon />
+					<StyledCloseIcon />
 				</Pressable>
 			</Header>
-			<Main>
+			<Main onPress={() => { Keyboard.dismiss() }}>
 				{
 					errorMsg &&
 					<ErrorAlert>{errorMsg}</ErrorAlert>
@@ -87,12 +79,12 @@ export const SelectCityScreen = (props) => {
 							<Pressable
 								onPress={() => handlePress(item)}
 							>
-								<CityRow>
+								<Row>
 									<BaseText>
 										{item.name}
 									</BaseText>
 									<RightArrowIcon />
-								</CityRow>
+								</Row>
 							</Pressable>
 						)}
 						ItemSeparatorComponent={() => (

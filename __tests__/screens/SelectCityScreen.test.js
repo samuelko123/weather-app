@@ -3,6 +3,7 @@ import {
 	fireEvent,
 	render,
 } from '@testing-library/react-native'
+import { Keyboard } from 'react-native'
 import axios from 'axios'
 
 import { Wrapper } from '../../src/App'
@@ -86,6 +87,24 @@ describe('happy path', () => {
 
 		// Assert
 		expect(global.navMock.navigate).toBeCalledWith('Home')
+	})
+
+	test('dismiss keyword', async () => {
+		// Arrange
+		const screen = render(
+			<Wrapper>
+				<SelectCityScreen navigation={global.navMock} />
+			</Wrapper>
+		)
+		const spy = {
+			fn: jest.spyOn(Keyboard, 'dismiss').mockImplementation(() => {}),
+		}
+
+		// Act
+		fireEvent.press(await screen.findByText('No results found'))
+
+		// Assert
+		expect(spy.fn).toBeCalledTimes(1)
 	})
 })
 

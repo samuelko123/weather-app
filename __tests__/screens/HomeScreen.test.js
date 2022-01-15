@@ -35,8 +35,8 @@ describe('happy path', () => {
 
 		// Assert
 		expect(await screen.findByA11yLabel('Search')).toBeTruthy()
-		expect(screen.getByText('22')).toBeTruthy()
-		expect(screen.getByText('31')).toBeTruthy()
+		expect(screen.getByText('22.0')).toBeTruthy()
+		expect(screen.getByText('31.0')).toBeTruthy()
 	})
 
 	test('navigate', async () => {

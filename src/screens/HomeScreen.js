@@ -6,8 +6,8 @@ import {
 	useSelector,
 } from 'react-redux'
 import moment from 'moment'
-import { useSevenDayForecast } from '../hooks'
 
+import { useSevenDayForecast } from '../hooks'
 import {
 	BaseText,
 	ErrorAlert,
@@ -25,8 +25,8 @@ const StyledButton = styled.Pressable`
 	align-items: center;
 `
 
-const StyledTitle = styled(Title)`
-	margin-left: 6px;
+const StyledSearchIcon = styled(SearchIcon)`
+	margin-right: ${props => props.theme.margin.icon}px;
 `
 
 const DateText = styled(BaseText)`
@@ -55,8 +55,8 @@ export const HomeScreen = (props) => {
 		<>
 			<Header>
 				<StyledButton onPress={() => navigation.navigate('Select City')}>
-					<SearchIcon />
-					<StyledTitle>{city.name}</StyledTitle>
+					<StyledSearchIcon />
+					<Title>{city.name}</Title>
 				</StyledButton>
 			</Header>
 			<Main>
@@ -76,8 +76,8 @@ export const HomeScreen = (props) => {
 						renderItem={({ item }) => (
 							<Row>
 								<DateText>{moment.unix(item.dt).format('DD/MM ddd')}</DateText>
-								<MinTempText>{Math.round(item.min)}</MinTempText>
-								<MaxTempText>{Math.round(item.max)}</MaxTempText>
+								<MinTempText>{item.min.toFixed(1)}</MinTempText>
+								<MaxTempText>{item.max.toFixed(1)}</MaxTempText>
 							</Row>
 						)}
 					/>

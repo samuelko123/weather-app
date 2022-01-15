@@ -25,7 +25,5 @@ describe('happy path', () => {
 
 		// Assert
 		expect(await screen.findByA11yLabel('Search')).toBeTruthy()
-		expect(screen.getByText('22')).toBeTruthy()
-		expect(screen.getByText('31')).toBeTruthy()
 	})
 })
