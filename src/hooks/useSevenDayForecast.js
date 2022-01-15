@@ -12,6 +12,7 @@ export const useSevenDayForecast = (lat, lon) => {
 	const fetchData = async () => {
 		try {
 			setIsLoading(true)
+			setErrorMsg(null)
 			const url = `https://weather-api-samuelko.vercel.app/api/seven-day-forecast?lat=${lat}&lon=${lon}`
 			const res = await axios.get(url)
 			setData(res.data)

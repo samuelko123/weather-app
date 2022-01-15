@@ -52,7 +52,7 @@ describe('happy path', () => {
 		fireEvent.press(btn)
 
 		// Assert
-		expect(global.navMock.navigate).toBeCalledWith('Select City')
+		expect(global.navMock.navigate).toBeCalledWith('Suburb')
 	})
 })
 

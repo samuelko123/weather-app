@@ -6,7 +6,7 @@ import {
 import { debounce } from 'lodash'
 import axios from 'axios'
 
-export const useCitySearch = (namePrefix) => {
+export const useSuburbSearch = (keyword) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [data, setData] = useState([])
 	const [errorMsg, setErrorMsg] = useState(null)
@@ -14,10 +14,11 @@ export const useCitySearch = (namePrefix) => {
 	const fetchData = async () => {
 		try {
 			setIsLoading(true)
-			if (!namePrefix) {
+			setErrorMsg(null)
+			if (!keyword) {
 				setData([])
 			} else {
-				const url = `https://weather-api-samuelko.vercel.app/api/cities/au?namePrefix=${namePrefix}`
+				const url = `https://weather-api-samuelko.vercel.app/api/suburbs/${keyword}`
 				const res = await axios.get(url)
 				setData(res.data)
 			}
@@ -30,7 +31,7 @@ export const useCitySearch = (namePrefix) => {
 
 	const fetchDataDebounced = useMemo(
 		() => debounce(fetchData, 500),
-		[namePrefix]
+		[keyword]
 	)
 
 	useEffect(() => {
@@ -38,7 +39,7 @@ export const useCitySearch = (namePrefix) => {
 		return () => {
 			fetchDataDebounced.cancel()
 		}
-	}, [namePrefix])
+	}, [keyword])
 
 	return [isLoading, data, errorMsg]
 }

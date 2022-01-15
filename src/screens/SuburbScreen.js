@@ -7,8 +7,8 @@ import {
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 
-import { setCity } from '../redux/slices'
-import { useCitySearch } from '../hooks'
+import { setSuburb } from '../redux/slices'
+import { useSuburbSearch } from '../hooks'
 import {
 	BaseText,
 	CloseIcon,
@@ -30,15 +30,15 @@ const StyledCloseIcon = styled(CloseIcon)`
 	margin-left: ${props => props.theme.margin.icon}px;
 `
 
-export const SelectCityScreen = (props) => {
+export const SuburbScreen = (props) => {
 	const { navigation } = props
 	const [keyword, setKeyword] = useState('')
-	const [isLoading, data, errorMsg] = useCitySearch(keyword)
+	const [isLoading, data, errorMsg] = useSuburbSearch(keyword)
 	const dispatch = useDispatch()
 
 	const handleChange = (text) => setKeyword(text)
 	const handlePress = (item) => {
-		dispatch(setCity(item))
+		dispatch(setSuburb(item))
 		navigation.navigate('Home')
 	}
 

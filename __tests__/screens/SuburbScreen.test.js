@@ -7,7 +7,7 @@ import { Keyboard } from 'react-native'
 import axios from 'axios'
 
 import { Wrapper } from '../../src/App'
-import { SelectCityScreen } from '../../src/screens'
+import { SuburbScreen } from '../../src/screens'
 
 describe('happy path', () => {
 	beforeEach(() => {
@@ -34,7 +34,7 @@ describe('happy path', () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
-				<SelectCityScreen navigation={global.navMock} />
+				<SuburbScreen navigation={global.navMock} />
 			</Wrapper>
 		)
 
@@ -46,7 +46,7 @@ describe('happy path', () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
-				<SelectCityScreen navigation={global.navMock} />
+				<SuburbScreen navigation={global.navMock} />
 			</Wrapper>
 		)
 
@@ -62,7 +62,7 @@ describe('happy path', () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
-				<SelectCityScreen navigation={global.navMock} />
+				<SuburbScreen navigation={global.navMock} />
 			</Wrapper>
 		)
 
@@ -73,11 +73,11 @@ describe('happy path', () => {
 		expect(await screen.findByText('Melbourne Airport')).toBeTruthy()
 	})
 
-	test('press a city', async () => {
+	test('press a suburb', async () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
-				<SelectCityScreen navigation={global.navMock} />
+				<SuburbScreen navigation={global.navMock} />
 			</Wrapper>
 		)
 
@@ -93,7 +93,7 @@ describe('happy path', () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
-				<SelectCityScreen navigation={global.navMock} />
+				<SuburbScreen navigation={global.navMock} />
 			</Wrapper>
 		)
 		const spy = {
@@ -116,7 +116,7 @@ describe('error handling', () => {
 
 		const screen = render(
 			<Wrapper>
-				<SelectCityScreen navigation={global.navMock} />
+				<SuburbScreen navigation={global.navMock} />
 			</Wrapper>
 		)
 

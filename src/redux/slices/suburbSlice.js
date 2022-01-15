@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const citySlice = createSlice({
+const suburbSlice = createSlice({
 	initialState: {
 		lat: -37.820555555,
 		lon: 144.961388888,
 		name: 'Melbourne',
 	},
-	name: 'city',
+	name: 'suburb',
 	reducers: {
-		setCity: (state, action) => {
+		setSuburb: (state, action) => {
 			return { ...action.payload }
 		},
 	},
 })
 
 export const {
-	setCity,
-} = citySlice.actions
-export const cityReducer = citySlice.reducer
+	setSuburb,
+} = suburbSlice.actions
+export const suburbReducer = suburbSlice.reducer

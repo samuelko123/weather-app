@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import {
 	HomeScreen,
-	SelectCityScreen,
+	SuburbScreen,
 } from './screens'
 import { Layout } from './components'
 import { theme } from './styles'
@@ -42,8 +42,8 @@ export const App = () => {
 				>
 					<Stack.Screen name="Home" component={HomeScreen} />
 					<Stack.Screen
-						name="Select City"
-						component={SelectCityScreen}
+						name="Suburb"
+						component={SuburbScreen}
 						options={{
 							gestureDirection: 'vertical',
 							gestureEnabled: true,

@@ -48,15 +48,15 @@ const MaxTempText = styled(BaseText)`
 export const HomeScreen = (props) => {
 	const { navigation } = props
 
-	const city = useSelector(state => state.city, shallowEqual)
-	const [isLoading, data, errorMsg] = useSevenDayForecast(city.lat, city.lon)
+	const suburb = useSelector(state => state.suburb, shallowEqual)
+	const [isLoading, data, errorMsg] = useSevenDayForecast(suburb.lat, suburb.lon)
 
 	return (
 		<>
 			<Header>
-				<StyledButton onPress={() => navigation.navigate('Select City')}>
+				<StyledButton onPress={() => navigation.navigate('Suburb')}>
 					<StyledSearchIcon />
-					<Title>{city.name}</Title>
+					<Title>{suburb.name}</Title>
 				</StyledButton>
 			</Header>
 			<Main>

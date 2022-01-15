@@ -1,4 +1,4 @@
 export {
-	cityReducer,
-	setCity,
-} from './citySlice'
+	suburbReducer,
+	setSuburb,
+} from './suburbSlice'
