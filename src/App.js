@@ -16,31 +16,41 @@ import {
 
 const Stack = createNativeStackNavigator()
 
-export const App = () => {
+export const Wrapper = (props) => {
+	const { children } = props
+
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
 				<Layout theme={theme}>
-					<NavigationContainer>
-						<Stack.Navigator
-							screenOptions={{
-								headerShown: false,
-							}}
-							initialRouteName="Home"
-						>
-							<Stack.Screen name="Home" component={HomeScreen} />
-							<Stack.Screen
-								name="Select City"
-								component={SelectCityScreen}
-								options={{
-									gestureEnabled: true,
-									gestureDirection: 'vertical',
-								}}
-							/>
-						</Stack.Navigator>
-					</NavigationContainer>
+					{children}
 				</Layout>
 			</PersistGate>
 		</Provider>
+	)
+}
+
+export const App = () => {
+	return (
+		<Wrapper>
+			<NavigationContainer>
+				<Stack.Navigator
+					screenOptions={{
+						headerShown: false,
+					}}
+					initialRouteName="Home"
+				>
+					<Stack.Screen name="Home" component={HomeScreen} />
+					<Stack.Screen
+						name="Select City"
+						component={SelectCityScreen}
+						options={{
+							gestureEnabled: true,
+							gestureDirection: 'vertical',
+						}}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Wrapper>
 	)
 }

@@ -2,14 +2,14 @@ module.exports = {
 	clearMocks: true,
 	collectCoverage: true,
 	coverageDirectory: 'coverage',
-	maxWorkers: '50%',
 	preset: 'jest-expo',
+	restoreMocks: true,
 	setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 	testEnvironment: 'jest-environment-jsdom',
 	testMatch: [
 		'<rootDir>/__tests__/**/*.test.js',
 	],
-	testTimeout: 10000, // 10s
+	testTimeout: 15 * 1000, // 15s
 	transform: {
 		'^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
 	},
