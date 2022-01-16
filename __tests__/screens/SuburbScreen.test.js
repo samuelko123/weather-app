@@ -21,10 +21,14 @@ describe('happy path', () => {
 					lat: -37,
 					lon: 144,
 					name: 'Melbourne',
+					postcode: 3000,
+					state: 'VIC',
 				}, {
 					lat: -37,
 					lon: 144,
 					name: 'Melbourne Airport',
+					postcode: 3045,
+					state: 'VIC',
 				}],
 			})
 		})
@@ -67,7 +71,7 @@ describe('happy path', () => {
 		)
 
 		// Act
-		fireEvent.changeText(screen.getByPlaceholderText('Search'), 'Melbourne')
+		fireEvent.changeText(screen.getByRole('search'), 'Melbourne')
 
 		// Assert
 		expect(await screen.findByText('Melbourne Airport')).toBeTruthy()
@@ -82,7 +86,7 @@ describe('happy path', () => {
 		)
 
 		// Act
-		fireEvent.changeText(screen.getByPlaceholderText('Search'), 'Melbourne')
+		fireEvent.changeText(screen.getByRole('search'), 'Melbourne')
 		fireEvent.press(await screen.findByText('Melbourne Airport'))
 
 		// Assert
@@ -121,7 +125,7 @@ describe('error handling', () => {
 		)
 
 		// Act
-		fireEvent.changeText(screen.getByPlaceholderText('Search'), 'Melbourne')
+		fireEvent.changeText(screen.getByRole('search'), 'Melbourne')
 
 		// Assert
 		expect(await screen.findByText(errorMsg)).toBeTruthy()

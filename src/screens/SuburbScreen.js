@@ -4,6 +4,7 @@ import {
 	FlatList,
 	Keyboard,
 	Pressable,
+	View,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 
@@ -30,6 +31,10 @@ const StyledCloseIcon = styled(CloseIcon)`
 	margin-left: ${props => props.theme.margin.icon}px;
 `
 
+const SmallText = styled(BaseText)`
+	font-size: 12px;
+`
+
 export const SuburbScreen = (props) => {
 	const { navigation } = props
 	const [keyword, setKeyword] = useState('')
@@ -49,7 +54,8 @@ export const SuburbScreen = (props) => {
 					value={keyword}
 					onChangeText={handleChange}
 					autoFocus={true}
-					placeholder='Search'
+					placeholder='Search postcode/suburb'
+					accessibilityRole='search'
 				/>
 				<Pressable onPress={() => navigation.navigate('Home')}>
 					<StyledCloseIcon />
@@ -80,9 +86,14 @@ export const SuburbScreen = (props) => {
 								onPress={() => handlePress(item)}
 							>
 								<Row>
-									<BaseText>
-										{item.name}
-									</BaseText>
+									<View>
+										<BaseText>
+											{item.name}
+										</BaseText>
+										<SmallText>
+											{`${item.postcode}, ${item.state}`}
+										</SmallText>
+									</View>
 									<RightArrowIcon />
 								</Row>
 							</Pressable>
