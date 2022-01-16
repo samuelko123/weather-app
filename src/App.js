@@ -8,7 +8,6 @@ import {
 	SuburbScreen,
 } from './screens'
 import { Layout } from './components'
-import { theme } from './styles'
 import {
 	persistor,
 	store,
@@ -22,7 +21,7 @@ export const Wrapper = (props) => {
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
-				<Layout theme={theme}>
+				<Layout>
 					{children}
 				</Layout>
 			</PersistGate>

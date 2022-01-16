@@ -1,4 +1,4 @@
-export const theme = {
+const baseTheme = {
 	borderRadius: {
 		alert: 6,
 		button: 12,
@@ -9,24 +9,12 @@ export const theme = {
 		separator: 1,
 		textField: 1,
 	},
-	color: {
-		background: '#eeeeee',
-		brand: '#0d5257',
-		brandText: '#eeeeee',
-		errorBackground: '#ffdddd',
-		errorBorder: '#bb0000',
-		errorText: '#bb0000',
-		maxTemp: '#bb0000',
-		minTemp: '#0000bb',
-		placeholder: '#eeeeee88',
-		separator: '#cccccc',
-	},
 	fontSize: {
 		base: 18,
 		button: 18,
 		icon: 24,
 		textField: 18,
-		title: 24,
+		title: 18,
 	},
 	height: {
 		header: 72,
@@ -42,4 +30,40 @@ export const theme = {
 		main: 24,
 		textField: 6,
 	},
+}
+
+export const lightTheme = {
+	...baseTheme,
+	color: {
+		background: '#eeeeee',
+		baseText: '#111111',
+		brand: '#0d5257',
+		brandText: '#eeeeee',
+		errorBackground: '#ffdddd',
+		errorBorder: '#bb0000',
+		errorText: '#bb0000',
+		header: '#0d5257',
+		maxTemp: '#bb0000',
+		minTemp: '#0000bb',
+		placeholder: '#eeeeee88',
+		separator: '#cccccc',
+	},
+}
+
+export const darkTheme = {
+	...baseTheme,
+	color: {
+		background: '#121212',
+		baseText: '#ffffff99',
+		brand: '#272727',
+		brandText: '#ffffffde',
+		errorBackground: '#ffdddd',
+		errorBorder: '#bb0000',
+		errorText: '#bb0000',
+		header: '#272727',
+		maxTemp: '#ffffff99',
+		minTemp: '#ffffff99',
+		placeholder: '#ffffff99',
+		separator: '#ffffff61',
+	},	
 }

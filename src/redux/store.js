@@ -10,17 +10,21 @@ import {
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { suburbReducer } from './slices'
+import {
+	suburbReducer,
+	themeReducer,
+} from './slices'
 
 const rootReducer = combineReducers({
 	suburb: suburbReducer,
+	theme: themeReducer,
 })
 
 const persistConfig = {
 	key: 'root',
 	storage: AsyncStorage,
 	version: 1,
-	whitelist: ['suburb'],
+	whitelist: ['suburb', 'theme'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
