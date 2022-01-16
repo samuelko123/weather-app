@@ -12,6 +12,7 @@ import { setSuburb } from '../redux/slices'
 import { useSuburbSearch } from '../hooks'
 import {
 	BaseText,
+	Button,
 	CloseIcon,
 	ErrorAlert,
 	Header,
@@ -24,11 +25,13 @@ import {
 } from '../components'
 
 const StyledTextField = styled(TextField)`
+	margin-left: ${props => props.theme.padding.header}px;
 	flex: 1;
 `
 
 const StyledCloseIcon = styled(CloseIcon)`
-	margin-left: ${props => props.theme.margin.icon}px;
+	padding-left: ${props => props.theme.margin.icon}px;
+	padding-right: ${props => props.theme.padding.header}px;
 `
 
 const SmallText = styled(BaseText)`
@@ -57,9 +60,9 @@ export const SuburbScreen = (props) => {
 					placeholder='Search postcode/suburb'
 					accessibilityRole='search'
 				/>
-				<Pressable onPress={() => navigation.navigate('Home')}>
+				<Button onPress={() => navigation.navigate('Home')}>
 					<StyledCloseIcon />
-				</Pressable>
+				</Button>
 			</Header>
 			<Main onPress={() => { Keyboard.dismiss() }}>
 				{

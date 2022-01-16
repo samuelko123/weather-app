@@ -1,4 +1,5 @@
 export { BaseText } from './BaseText'
+export { Button } from './Button'
 export { CloseIcon } from './CloseIcon'
 export { ErrorAlert } from './ErrorAlert'
 export { Header } from './Header'

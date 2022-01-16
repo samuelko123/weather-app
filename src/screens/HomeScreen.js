@@ -10,6 +10,7 @@ import moment from 'moment'
 import { useSevenDayForecast } from '../hooks'
 import {
 	BaseText,
+	Button,
 	ErrorAlert,
 	Header,
 	Main,
@@ -19,13 +20,8 @@ import {
 	Title,
 } from '../components'
 
-const StyledButton = styled.Pressable`
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-`
-
 const StyledSearchIcon = styled(SearchIcon)`
+	padding-left: ${props => props.theme.padding.header}px;
 	margin-right: ${props => props.theme.margin.icon}px;
 `
 
@@ -54,10 +50,10 @@ export const HomeScreen = (props) => {
 	return (
 		<>
 			<Header>
-				<StyledButton onPress={() => navigation.navigate('Suburb')}>
+				<Button onPress={() => navigation.navigate('Suburb')}>
 					<StyledSearchIcon />
 					<Title>{suburb.name}</Title>
-				</StyledButton>
+				</Button>
 			</Header>
 			<Main>
 				{
