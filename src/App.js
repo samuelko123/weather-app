@@ -40,14 +40,7 @@ export const App = () => {
 					initialRouteName="Home"
 				>
 					<Stack.Screen name="Home" component={HomeScreen} />
-					<Stack.Screen
-						name="Suburb"
-						component={SuburbScreen}
-						options={{
-							gestureDirection: 'vertical',
-							gestureEnabled: true,
-						}}
-					/>
+					<Stack.Screen name="Suburb" component={SuburbScreen} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Wrapper>
