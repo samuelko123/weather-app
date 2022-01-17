@@ -82,7 +82,7 @@ export const SettingsScreen = (props) => {
 										{item}
 									</StyledText>
 									{
-										item.toLowerCase() === currentTheme.name.toLowerCase() &&
+										item.toLowerCase() === currentTheme.name &&
 										<CheckIcon />
 									}
 								</StyledRow>
