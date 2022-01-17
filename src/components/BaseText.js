@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
 export const BaseText = styled.Text`
-    font-size: ${props => props.theme.fontSize.base}px;
-    color: ${props => props.theme.color.baseText};
+    font-size: ${props => props.theme.base.fontSize}px;
+    color: ${props => props.theme.color.onBackground};
 `

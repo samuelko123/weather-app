@@ -3,7 +3,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 export const SearchIcon = styled(AntDesign).attrs(props => ({
 	accessibilityLabel: 'Search',
-	color: props.theme.color.brandText,
+	color: props.theme.color.onPrimary,
 	name: 'search1',
-	size: props.theme.fontSize.icon,
+	size: props.theme.base.fontSize * 1.5,
 }))``

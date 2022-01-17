@@ -22,7 +22,7 @@ export const Layout = (props) => {
 	const theme = useSelector(state => state.theme, shallowEqual)
 
 	return (
-		<ThemeProvider theme={theme.color === 'light' ? lightTheme : darkTheme}>
+		<ThemeProvider theme={theme.name === 'light' ? lightTheme : darkTheme}>
 			<SafeAreaView>
 				<RootContainer>
 					{children}

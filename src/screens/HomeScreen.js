@@ -24,26 +24,19 @@ import {
 } from '../components'
 
 const StyledSearchIcon = styled(SearchIcon)`
-	padding-left: ${props => props.theme.padding.header}px;
-	margin-right: ${props => props.theme.margin.icon}px;
+	padding-left: ${props => props.theme.base.spacing * 2}px;
+	margin-right: ${props => props.theme.base.spacing * 0.5}px;
 `
 
 const StyledSwitchContainer = styled.View`
-	margin-right: ${props => props.theme.padding.header}px;
+	margin-right: ${props => props.theme.base.spacing * 2}px;
 `
 
 const DateText = styled(BaseText)`
     flex: 1;
 `
 
-const MinTempText = styled(BaseText)`
-    color: ${props => props.theme.color.minTemp};
-    text-align: right;
-    flex: 1;
-`
-
-const MaxTempText = styled(BaseText)`
-    color: ${props => props.theme.color.maxTemp};
+const TempText = styled(BaseText)`
     text-align: right;
     flex: 1;
 `
@@ -83,8 +76,8 @@ export const HomeScreen = (props) => {
 						renderItem={({ item }) => (
 							<Row>
 								<DateText>{moment.unix(item.dt).format('DD/MM ddd')}</DateText>
-								<MinTempText>{item.min.toFixed(1)}</MinTempText>
-								<MaxTempText>{item.max.toFixed(1)}</MaxTempText>
+								<TempText>{item.min.toFixed(1)}</TempText>
+								<TempText>{item.max.toFixed(1)}</TempText>
 							</Row>
 						)}
 					/>

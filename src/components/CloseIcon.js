@@ -3,7 +3,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 export const CloseIcon = styled(AntDesign).attrs(props => ({
 	accessibilityLabel: 'Close',
-	color: props.theme.color.brandText,
+	color: props.theme.color.onPrimary,
 	name: 'close',
-	size: props.theme.fontSize.icon,
+	size: props.theme.base.fontSize * 1.5,
 }))``

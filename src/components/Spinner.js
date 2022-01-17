@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 export const Spinner = styled.ActivityIndicator.attrs(props => ({
 	accessibilityLabel: 'Loading...',
-	color: props.theme.color.brand,
+	color: props.theme.color.onBackground,
 	size: 'large',
 }))`
     position: absolute;

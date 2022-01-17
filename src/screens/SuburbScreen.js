@@ -25,17 +25,17 @@ import {
 } from '../components'
 
 const StyledTextField = styled(TextField)`
-	margin-left: ${props => props.theme.padding.header}px;
+	margin-left: ${props => props.theme.base.spacing * 2}px;
 	flex: 1;
 `
 
 const StyledCloseIcon = styled(CloseIcon)`
-	padding-left: ${props => props.theme.margin.icon}px;
-	padding-right: ${props => props.theme.padding.header}px;
+	padding-left: ${props => props.theme.base.spacing * 0.5}px;
+	padding-right: ${props => props.theme.base.spacing * 2}px;
 `
 
 const SmallText = styled(BaseText)`
-	font-size: 12px;
+	font-size: ${props => props.theme.base.fontSize / 1.5}px;
 `
 
 export const SuburbScreen = (props) => {
