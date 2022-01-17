@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import {
 	HomeScreen,
+	SettingsScreen,
 	SuburbScreen,
 } from './screens'
 import { Layout } from './components'
@@ -40,6 +41,7 @@ export const App = () => {
 					initialRouteName="Home"
 				>
 					<Stack.Screen name="Home" component={HomeScreen} />
+					<Stack.Screen name="Settings" component={SettingsScreen} />
 					<Stack.Screen name="Suburb" component={SuburbScreen} />
 				</Stack.Navigator>
 			</NavigationContainer>

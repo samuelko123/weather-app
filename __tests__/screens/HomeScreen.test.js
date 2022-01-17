@@ -7,7 +7,6 @@ import axios from 'axios'
 
 import { Wrapper } from '../../src/App'
 import { HomeScreen } from '../../src/screens'
-import * as themeSlice from '../../src/redux/slices/themeSlice'
 
 describe('happy path', () => {
 	beforeEach(() => {
@@ -40,7 +39,7 @@ describe('happy path', () => {
 		expect(screen.getByText('31.0')).toBeTruthy()
 	})
 
-	test('navigate', async () => {
+	test('navigate to suburb screen', async () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
@@ -56,27 +55,20 @@ describe('happy path', () => {
 		expect(global.navMock.navigate).toBeCalledWith('Suburb')
 	})
 
-	test('toggle theme', async () => {
+	test('navigate to settings screen', async () => {
 		// Arrange
 		const screen = render(
 			<Wrapper>
 				<HomeScreen navigation={global.navMock} />
 			</Wrapper>
 		)
-		const setTheme = jest.spyOn(themeSlice, 'setTheme')
 
 		// Act
-		const toggle = await screen.findByA11yRole('switch')
-		fireEvent.press(toggle)
+		const btn = await screen.findByA11yLabel('Menu Button')
+		fireEvent.press(btn)
 
 		// Assert
-		expect(setTheme).toBeCalledWith('dark')
-
-		// Act
-		fireEvent.press(toggle)
-
-		// Assert
-		expect(setTheme).toBeCalledWith('light')
+		expect(global.navMock.navigate).toBeCalledWith('Settings')
 	})
 })
 

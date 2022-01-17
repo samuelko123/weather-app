@@ -3,9 +3,6 @@ import styled from 'styled-components/native'
 
 const StyledPressable = styled.Pressable`
 	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
 `
 
 export const Button = (props) => {

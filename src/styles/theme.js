@@ -1,6 +1,6 @@
 const baseTheme = {
 	base: {
-		borderRadius: 6,
+		borderRadius: 12,
 		borderWidth: 1,
 		fontSize: 18,
 		spacing: 12,
@@ -10,12 +10,14 @@ const baseTheme = {
 export const lightTheme = {
 	...baseTheme,
 	color: {
-		background: '#dedede',
+		background: '#e0e0e0',
 		error: '#ffdddd',
 		onBackground: '#121212',
 		onError: '#bb0000',
 		onPrimary: '#dedede',
+		onSurface: '#121212',
 		primary: '#0d5257',
+		surface: '#efefef',
 	},
 }
 
@@ -27,6 +29,8 @@ export const darkTheme = {
 		onBackground: '#dedede',
 		onError: '#121212',
 		onPrimary: '#cdcdcd',
+		onSurface: '#cdcdcd',
 		primary: '#272727',
+		surface: '#272727',
 	},
 }

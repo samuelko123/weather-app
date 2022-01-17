@@ -3,12 +3,10 @@ import styled from 'styled-components/native'
 import { FlatList } from 'react-native'
 import {
 	shallowEqual,
-	useDispatch,
 	useSelector,
 } from 'react-redux'
 import moment from 'moment'
 
-import { setTheme } from '../redux/slices'
 import { useSevenDayForecast } from '../hooks'
 import {
 	BaseText,
@@ -16,10 +14,10 @@ import {
 	ErrorAlert,
 	Header,
 	Main,
+	MenuIcon,
 	Row,
 	SearchIcon,
 	Spinner,
-	Switch,
 	Title,
 } from '../components'
 
@@ -28,8 +26,9 @@ const StyledSearchIcon = styled(SearchIcon)`
 	margin-right: ${props => props.theme.base.spacing * 0.5}px;
 `
 
-const StyledSwitchContainer = styled.View`
-	margin-right: ${props => props.theme.base.spacing * 2}px;
+const StyledMenuIcon = styled(MenuIcon)`
+	padding-left: ${props => props.theme.base.spacing * 2}px;
+	padding-right: ${props => props.theme.base.spacing * 2}px;
 `
 
 const DateText = styled(BaseText)`
@@ -46,7 +45,6 @@ export const HomeScreen = (props) => {
 
 	const suburb = useSelector(state => state.suburb, shallowEqual)
 	const [isLoading, data, errorMsg] = useSevenDayForecast(suburb.lat, suburb.lon)
-	const dispatch = useDispatch()
 
 	return (
 		<>
@@ -55,9 +53,9 @@ export const HomeScreen = (props) => {
 					<StyledSearchIcon />
 					<Title>{suburb.name}</Title>
 				</Button>
-				<StyledSwitchContainer>
-					<Switch onPress={(dark) => dispatch(setTheme(dark ? 'dark' : 'light')) } />
-				</StyledSwitchContainer>
+				<Button onPress={() => navigation.navigate('Settings')}>
+					<StyledMenuIcon />
+				</Button>
 			</Header>
 			<Main>
 				{
