@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/native'
-
-const StyledPressable = styled.Pressable`
-	flex-direction: row;
-`
+import { Pressable } from 'react-native'
 
 export const Button = (props) => {
 	const {
@@ -14,13 +10,13 @@ export const Button = (props) => {
 	const [opacity, setOpacity] = useState(1)
 
 	return (
-		<StyledPressable
+		<Pressable
 			onPress={onPress}
 			onPressIn={() => setOpacity(0.5)}
 			onPressOut={() => setOpacity(1)}
 			opacity={opacity}
 		>
 			{children}
-		</StyledPressable>
+		</Pressable>
 	)
 }

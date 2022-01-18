@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import {
 	FlatList,
 	Keyboard,
-	Pressable,
+	TouchableWithoutFeedback,
 	View,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
@@ -16,6 +16,7 @@ import {
 	CloseIcon,
 	ErrorAlert,
 	Header,
+	ListContainer,
 	Main,
 	RightArrowIcon,
 	Row,
@@ -64,49 +65,53 @@ export const SuburbScreen = (props) => {
 					<StyledCloseIcon />
 				</Button>
 			</Header>
-			<Main onPress={() => { Keyboard.dismiss() }}>
-				{
-					errorMsg &&
-					<ErrorAlert>{errorMsg}</ErrorAlert>
-				}
-				{
-					isLoading &&
-					<Spinner />
-				}
-				{
-					!errorMsg && !isLoading && (data.length === 0) &&
-					<BaseText>
-						No results found
-					</BaseText>
-				}
-				{
-					!errorMsg && !isLoading && (data.length > 0) &&
-					<FlatList
-						data={data}
-						keyExtractor={(item, index) => index}
-						renderItem={({ item }) => (
-							<Pressable
-								onPress={() => handlePress(item)}
-							>
-								<Row>
-									<View>
-										<BaseText>
-											{item.name}
-										</BaseText>
-										<SmallText>
-											{`${item.postcode}, ${item.state}`}
-										</SmallText>
-									</View>
-									<RightArrowIcon />
-								</Row>
-							</Pressable>
-						)}
-						ItemSeparatorComponent={() => (
-							<Separator />
-						)}
-					/>
-				}
-			</Main>
+			<TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
+				<Main>
+					{
+						errorMsg &&
+						<ErrorAlert>{errorMsg}</ErrorAlert>
+					}
+					{
+						isLoading &&
+						<Spinner />
+					}
+					{
+						!errorMsg && !isLoading && (data.length === 0) &&
+						<BaseText>
+							No results found
+						</BaseText>
+					}
+					{
+						!errorMsg && !isLoading && (data.length > 0) &&
+						<ListContainer>
+							<FlatList
+								data={data}
+								keyExtractor={(item, index) => index}
+								renderItem={({ item }) => (
+									<Button
+										onPress={() => handlePress(item)}
+									>
+										<Row>
+											<View>
+												<BaseText>
+													{item.name}
+												</BaseText>
+												<SmallText>
+													{`${item.postcode}, ${item.state}`}
+												</SmallText>
+											</View>
+											<RightArrowIcon />
+										</Row>
+									</Button>
+								)}
+								ItemSeparatorComponent={() => (
+									<Separator />
+								)}
+							/>
+						</ListContainer>
+					}
+				</Main>
+			</TouchableWithoutFeedback>
 		</>
 	)
 }

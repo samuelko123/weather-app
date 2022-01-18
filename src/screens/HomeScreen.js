@@ -13,13 +13,19 @@ import {
 	Button,
 	ErrorAlert,
 	Header,
+	ListContainer,
 	Main,
 	MenuIcon,
 	Row,
 	SearchIcon,
+	Separator,
 	Spinner,
 	Title,
 } from '../components'
+
+const StyledTitleContainer = styled.View`
+	flex-direction: row;
+`
 
 const StyledSearchIcon = styled(SearchIcon)`
 	padding-left: ${props => props.theme.base.spacing * 2}px;
@@ -50,11 +56,15 @@ export const HomeScreen = (props) => {
 		<>
 			<Header>
 				<Button onPress={() => navigation.navigate('Suburb')}>
-					<StyledSearchIcon />
-					<Title>{suburb.name}</Title>
+					<StyledTitleContainer>
+						<StyledSearchIcon />
+						<Title>{suburb.name}</Title>
+					</StyledTitleContainer>
 				</Button>
 				<Button onPress={() => navigation.navigate('Settings')}>
+
 					<StyledMenuIcon />
+
 				</Button>
 			</Header>
 			<Main>
@@ -68,17 +78,23 @@ export const HomeScreen = (props) => {
 				}
 				{
 					!errorMsg && !isLoading &&
-					<FlatList
-						data={data}
-						keyExtractor={(item) => item.dt}
-						renderItem={({ item }) => (
-							<Row>
-								<DateText>{moment.unix(item.dt).format('DD/MM ddd')}</DateText>
-								<TempText>{item.min.toFixed(1)}</TempText>
-								<TempText>{item.max.toFixed(1)}</TempText>
-							</Row>
-						)}
-					/>
+					<ListContainer>
+						<FlatList
+							data={data}
+							keyExtractor={(item) => item.dt}
+							scrollEnabled={false}
+							renderItem={({ item }) => (
+								<Row>
+									<DateText>{moment.unix(item.dt).format('DD/MM ddd')}</DateText>
+									<TempText>{item.min.toFixed(1)}</TempText>
+									<TempText>{item.max.toFixed(1)}</TempText>
+								</Row>
+							)}
+							ItemSeparatorComponent={() => (
+								<Separator />
+							)}
+						/>
+					</ListContainer>
 				}
 			</Main>
 		</>

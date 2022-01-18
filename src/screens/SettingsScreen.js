@@ -14,6 +14,7 @@ import {
 	CheckIcon,
 	CloseIcon,
 	Header,
+	ListContainer,
 	Main,
 	Row,
 	Separator,
@@ -34,17 +35,6 @@ const StyledSectionHeader = styled(BaseText)`
 	font-weight: bold;
 	text-transform: uppercase;
 	margin-bottom: ${props => props.theme.base.spacing}px;
-`
-
-const StyledListContainer = styled.View`
-	background-color: ${props => props.theme.color.surface};
-	border-radius: ${props => props.theme.base.borderRadius}px;
-`
-
-const StyledRow = styled(Row)`
-	padding-left: ${props => props.theme.base.spacing}px;
-	padding-right: ${props => props.theme.base.spacing}px;
-	flex: 1;
 `
 
 const StyledText = styled(BaseText)`
@@ -71,13 +61,14 @@ export const SettingsScreen = (props) => {
 			</Header>
 			<Main>
 				<StyledSectionHeader>Theme</StyledSectionHeader>
-				<StyledListContainer>
+				<ListContainer>
 					<FlatList
 						data={data}
 						keyExtractor={(item) => item}
+						scrollEnabled={false}
 						renderItem={({ item }) => (
 							<Button onPress={() => handlePress(item)}>
-								<StyledRow>
+								<Row>
 									<StyledText>
 										{item}
 									</StyledText>
@@ -85,14 +76,14 @@ export const SettingsScreen = (props) => {
 										item.toLowerCase() === currentTheme.name &&
 										<CheckIcon />
 									}
-								</StyledRow>
+								</Row>
 							</Button>
 						)}
 						ItemSeparatorComponent={() => (
 							<Separator />
 						)}
 					/>
-				</StyledListContainer>
+				</ListContainer>
 			</Main>
 		</>
 	)

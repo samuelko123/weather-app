@@ -18,8 +18,14 @@ describe('happy path', () => {
 			return Promise.resolve({
 				data: [{
 					dt: 1000000000,
-					max: 30.99,
 					min: 22.01,
+					max: 30.99,
+					
+				},
+				{
+					dt: 1000000001,
+					min: 15,
+					max: 20,
 				}],
 			})
 		})
