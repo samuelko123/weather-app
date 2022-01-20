@@ -137,7 +137,8 @@ export const HomeScreen = (props) => {
 							data={data.daily}
 							renderItem={(item, index) =>
 								<Row key={index}>
-									<DateText>{moment.unix(item.dt).format('dddd')}</DateText>
+									<DateText>{moment.unix(item.dt).format('ddd')}</DateText>
+									<WeatherIcon name={item.icon} />
 									<TempText>{`${item.min.toFixed(1)}°`}</TempText>
 									<TempBoldText>{`${item.max.toFixed(1)}°`}</TempBoldText>
 								</Row>
