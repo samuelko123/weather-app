@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
-import { AntDesign } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-export const CheckIcon = styled(AntDesign).attrs(props => ({
+export const CheckIcon = styled(MaterialCommunityIcons).attrs(props => ({
 	accessibilityLabel: 'Selected',
-	color: props.theme.color.onSurface,
+	color: props.theme.color.iconOnSurface,
 	name: 'check',
-	size: props.theme.base.fontSize,
+	size: props.theme.base.fontSize * 1.5,
 }))``

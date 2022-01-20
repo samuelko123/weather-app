@@ -17,7 +17,8 @@ export const lightTheme = {
 		primary: '#0d5257',
 		onPrimary: '#dedede',
 		surface: '#efefef',
-		onSurface: '#121212',
+		textOnSurface: '#121212',
+		iconOnSurface: '#0d5257',
 	},
 }
 
@@ -31,6 +32,7 @@ export const darkTheme = {
 		primary: '#272727',
 		onPrimary: '#cdcdcd',
 		surface: '#272727',
-		onSurface: '#cdcdcd',
+		textOnSurface: '#cdcdcd',
+		iconOnSurface: '#cdcdcd',
 	},
 }

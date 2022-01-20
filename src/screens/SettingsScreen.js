@@ -31,7 +31,7 @@ const StyledCloseIcon = styled(CloseIcon)`
 `
 
 const StyledText = styled(BaseText)`
-	color: ${props => props.theme.color.onSurface};
+	color: ${props => props.theme.color.textOnSurface};
 `
 
 export const SettingsScreen = (props) => {
