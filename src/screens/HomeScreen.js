@@ -1,30 +1,31 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { FlatList } from 'react-native'
 import {
 	shallowEqual,
 	useSelector,
 } from 'react-redux'
 import moment from 'moment'
 
-import { useSevenDayForecast } from '../hooks'
+import { useWeatherForecast } from '../hooks'
 import {
 	BaseText,
 	Button,
 	ErrorAlert,
 	Header,
-	ListContainer,
+	List,
 	Main,
 	MenuIcon,
 	Row,
 	SearchIcon,
-	Separator,
+	SectionHeader,
 	Spinner,
 	Title,
 } from '../components'
 
 const StyledTitleContainer = styled.View`
 	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
 `
 
 const StyledSearchIcon = styled(SearchIcon)`
@@ -42,15 +43,21 @@ const DateText = styled(BaseText)`
 `
 
 const TempText = styled(BaseText)`
-    text-align: right;
     flex: 1;
+	text-align: right;
+`
+
+const TempBoldText = styled(BaseText)`
+    flex: 1;
+	text-align: right;
+	font-weight: bold;
 `
 
 export const HomeScreen = (props) => {
 	const { navigation } = props
 
 	const suburb = useSelector(state => state.suburb, shallowEqual)
-	const [isLoading, data, errorMsg] = useSevenDayForecast(suburb.lat, suburb.lon)
+	const [isLoading, data, errorMsg] = useWeatherForecast(suburb.lat, suburb.lon)
 
 	return (
 		<>
@@ -62,9 +69,7 @@ export const HomeScreen = (props) => {
 					</StyledTitleContainer>
 				</Button>
 				<Button onPress={() => navigation.navigate('Settings')}>
-
 					<StyledMenuIcon />
-
 				</Button>
 			</Header>
 			<Main>
@@ -78,23 +83,45 @@ export const HomeScreen = (props) => {
 				}
 				{
 					!errorMsg && !isLoading &&
-					<ListContainer>
-						<FlatList
-							data={data}
-							keyExtractor={(item) => item.dt}
-							scrollEnabled={false}
-							renderItem={({ item }) => (
-								<Row>
-									<DateText>{moment.unix(item.dt).format('DD/MM ddd')}</DateText>
-									<TempText>{item.min.toFixed(1)}</TempText>
-									<TempText>{item.max.toFixed(1)}</TempText>
+					<>
+						<SectionHeader>
+							Current
+						</SectionHeader>
+						<List
+							data={[data.current]}
+							renderItem={(item, index) =>
+								<Row key={index}>
+									<DateText>{moment.unix(item.dt).format('hh:mm a')}</DateText>
+									<TempText>{`${item.temp.toFixed(1)}°`}</TempText>
 								</Row>
-							)}
-							ItemSeparatorComponent={() => (
-								<Separator />
-							)}
+							}
 						/>
-					</ListContainer>
+						<SectionHeader>
+							Daily
+						</SectionHeader>
+						<List
+							data={data.daily}
+							renderItem={(item, index) =>
+								<Row key={index}>
+									<DateText>{moment.unix(item.dt).format('dddd')}</DateText>
+									<TempText>{`${item.min.toFixed(1)}°`}</TempText>
+									<TempBoldText>{`${item.max.toFixed(1)}°`}</TempBoldText>
+								</Row>
+							}
+						/>
+						<SectionHeader>
+							Hourly
+						</SectionHeader>
+						<List
+							data={data.hourly}
+							renderItem={(item, index) =>
+								<Row key={index}>
+									<DateText>{moment.unix(item.dt).format('ddd ha')}</DateText>
+									<TempText>{`${item.temp.toFixed(1)}°`}</TempText>
+								</Row>
+							}
+						/>
+					</>
 				}
 			</Main>
 		</>

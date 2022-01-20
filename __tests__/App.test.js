@@ -6,22 +6,12 @@ import { App } from '../src/App'
 
 describe('happy path', () => {
 	beforeEach(() => {
-		jest.spyOn(axios, 'get').mockImplementation(() => {
-			return Promise.resolve({
-				data: [{
-					dt: 1000000000,
-					max: 30.99,
-					min: 22.01,
-				}],
-			})
-		})
+		jest.spyOn(axios, 'get').mockImplementation(() => {})
 	})
 
 	test('renders correctly', async () => {
 		// Arrange
-		const screen = render(
-			<App />
-		)
+		const screen = render(<App />)
 
 		// Assert
 		expect(await screen.findByA11yLabel('Search')).toBeTruthy()

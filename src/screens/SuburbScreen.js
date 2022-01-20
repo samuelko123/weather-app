@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/native'
-import {
-	FlatList,
-	Keyboard,
-	TouchableWithoutFeedback,
-	View,
-} from 'react-native'
+import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { setSuburb } from '../redux/slices'
@@ -16,11 +11,10 @@ import {
 	CloseIcon,
 	ErrorAlert,
 	Header,
-	ListContainer,
+	List,
 	Main,
 	RightArrowIcon,
 	Row,
-	Separator,
 	Spinner,
 	TextField,
 } from '../components'
@@ -65,53 +59,45 @@ export const SuburbScreen = (props) => {
 					<StyledCloseIcon />
 				</Button>
 			</Header>
-			<TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
-				<Main>
-					{
-						errorMsg &&
-						<ErrorAlert>{errorMsg}</ErrorAlert>
-					}
-					{
-						isLoading &&
-						<Spinner />
-					}
-					{
-						!errorMsg && !isLoading && (data.length === 0) &&
-						<BaseText>
-							No results found
-						</BaseText>
-					}
-					{
-						!errorMsg && !isLoading && (data.length > 0) &&
-						<ListContainer>
-							<FlatList
-								data={data}
-								keyExtractor={(item, index) => index}
-								renderItem={({ item }) => (
-									<Button
-										onPress={() => handlePress(item)}
-									>
-										<Row>
-											<View>
-												<BaseText>
-													{item.name}
-												</BaseText>
-												<SmallText>
-													{`${item.postcode}, ${item.state}`}
-												</SmallText>
-											</View>
-											<RightArrowIcon />
-										</Row>
-									</Button>
-								)}
-								ItemSeparatorComponent={() => (
-									<Separator />
-								)}
-							/>
-						</ListContainer>
-					}
-				</Main>
-			</TouchableWithoutFeedback>
+			<Main
+				keyboardDismissMode='on-drag'
+				keyboardShouldPersistTaps='handled'
+			>
+				{
+					errorMsg &&
+					<ErrorAlert>{errorMsg}</ErrorAlert>
+				}
+				{
+					isLoading &&
+					<Spinner />
+				}
+				{
+					!errorMsg && !isLoading &&
+					<List
+						data={data}
+						renderItem={(item, index) => (
+							<Button
+								key={index}
+								onPress={() => {
+									handlePress(item)
+								}}
+							>
+								<Row>
+									<View>
+										<BaseText>
+											{item.name}
+										</BaseText>
+										<SmallText>
+											{`${item.postcode}, ${item.state}`}
+										</SmallText>
+									</View>
+									<RightArrowIcon />
+								</Row>
+							</Button>
+						)}
+					/>
+				}
+			</Main>
 		</>
 	)
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { FlatList } from 'react-native'
 import {
 	shallowEqual,
 	useDispatch,
@@ -14,10 +13,10 @@ import {
 	CheckIcon,
 	CloseIcon,
 	Header,
-	ListContainer,
+	List,
 	Main,
 	Row,
-	Separator,
+	SectionHeader,
 	Title,
 } from '../components'
 
@@ -29,12 +28,6 @@ const StyledTitle = styled(Title)`
 const StyledCloseIcon = styled(CloseIcon)`
 	padding-left: ${props => props.theme.base.spacing * 0.5}px;
 	padding-right: ${props => props.theme.base.spacing * 2}px;
-`
-
-const StyledSectionHeader = styled(BaseText)`
-	font-weight: bold;
-	text-transform: uppercase;
-	margin-bottom: ${props => props.theme.base.spacing}px;
 `
 
 const StyledText = styled(BaseText)`
@@ -60,30 +53,26 @@ export const SettingsScreen = (props) => {
 				</Button>
 			</Header>
 			<Main>
-				<StyledSectionHeader>Theme</StyledSectionHeader>
-				<ListContainer>
-					<FlatList
-						data={data}
-						keyExtractor={(item) => item}
-						scrollEnabled={false}
-						renderItem={({ item }) => (
-							<Button onPress={() => handlePress(item)}>
-								<Row>
-									<StyledText>
-										{item}
-									</StyledText>
-									{
-										item.toLowerCase() === currentTheme.name &&
-										<CheckIcon />
-									}
-								</Row>
-							</Button>
-						)}
-						ItemSeparatorComponent={() => (
-							<Separator />
-						)}
-					/>
-				</ListContainer>
+				<SectionHeader>Theme</SectionHeader>
+				<List
+					data={data}
+					renderItem={(item, index) => (
+						<Button
+							key={index}
+							onPress={() => handlePress(item)}
+						>
+							<Row>
+								<StyledText>
+									{item}
+								</StyledText>
+								{
+									item.toLowerCase() === currentTheme.name &&
+									<CheckIcon />
+								}
+							</Row>
+						</Button>
+					)}
+				/>
 			</Main>
 		</>
 	)

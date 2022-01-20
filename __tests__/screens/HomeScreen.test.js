@@ -16,17 +16,30 @@ describe('happy path', () => {
 
 		jest.spyOn(axios, 'get').mockImplementation(() => {
 			return Promise.resolve({
-				data: [{
-					dt: 1000000000,
-					min: 22.01,
-					max: 30.99,
-					
+				data: {
+					current: {
+						dt: 1000000000,
+						temp: 0,
+					},
+					hourly: [
+						{
+							dt: 1000000000,
+							temp: 0,
+						},
+					],
+					daily: [
+						{
+							dt: 1000000000,
+							min: 22.01,
+							max: 30.99,
+						},
+						{
+							dt: 1000000001,
+							min: 15,
+							max: 20,
+						},
+					],
 				},
-				{
-					dt: 1000000001,
-					min: 15,
-					max: 20,
-				}],
 			})
 		})
 	})
@@ -41,8 +54,8 @@ describe('happy path', () => {
 
 		// Assert
 		expect(await screen.findByA11yLabel('Search')).toBeTruthy()
-		expect(screen.getByText('22.0')).toBeTruthy()
-		expect(screen.getByText('31.0')).toBeTruthy()
+		expect(screen.getByText('22.0°')).toBeTruthy()
+		expect(screen.getByText('31.0°')).toBeTruthy()
 	})
 
 	test('navigate to suburb screen', async () => {
