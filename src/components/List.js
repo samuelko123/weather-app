@@ -5,7 +5,6 @@ import { BaseText } from './BaseText'
 export const ListContainer = styled.View`
 	background-color: ${props => props.theme.color.surface};
 	border-radius: ${props => props.theme.base.borderRadius}px;
-	margin-bottom: ${props => props.theme.base.spacing * 2}px;
 `
 
 const Separator = styled.View`

@@ -15,6 +15,7 @@ import {
 	Main,
 	RightArrowIcon,
 	Row,
+	SectionHeader,
 	Spinner,
 	TextField,
 } from '../components'
@@ -63,6 +64,9 @@ export const SuburbScreen = (props) => {
 				keyboardDismissMode='on-drag'
 				keyboardShouldPersistTaps='handled'
 			>
+				<SectionHeader>
+					Locations
+				</SectionHeader>
 				{
 					errorMsg &&
 					<ErrorAlert>{errorMsg}</ErrorAlert>

@@ -5,12 +5,16 @@ import {
 	useSelector,
 } from 'react-redux'
 import moment from 'moment'
-import { RefreshControl } from 'react-native'
+import {
+	RefreshControl,
+	ScrollView,
+} from 'react-native'
 
 import { useWeatherForecast } from '../hooks'
 import {
 	BaseText,
 	Button,
+	Card,
 	ErrorAlert,
 	Header,
 	List,
@@ -21,6 +25,7 @@ import {
 	SectionHeader,
 	Spinner,
 	Title,
+	WeatherIcon,
 } from '../components'
 
 const StyledTitleContainer = styled.View`
@@ -105,6 +110,27 @@ export const HomeScreen = (props) => {
 							}
 						/>
 						<SectionHeader>
+							Hourly
+						</SectionHeader>
+						<ScrollView
+							horizontal={true}
+							showsHorizontalScrollIndicator={true}
+							pagingEnabled={false}
+						>
+							{data.hourly.map((item, index) =>
+								<Card
+									key={index}
+									width={72}
+									height={144}
+								>
+									<BaseText>{moment.unix(item.dt).format('ddd')}</BaseText>
+									<BaseText>{moment.unix(item.dt).format('ha')}</BaseText>
+									<WeatherIcon name={item.icon} />
+									<BaseText>{`${item.temp.toFixed(1)}°`}</BaseText>
+								</Card>
+							)}
+						</ScrollView>
+						<SectionHeader>
 							Daily
 						</SectionHeader>
 						<List
@@ -114,18 +140,6 @@ export const HomeScreen = (props) => {
 									<DateText>{moment.unix(item.dt).format('dddd')}</DateText>
 									<TempText>{`${item.min.toFixed(1)}°`}</TempText>
 									<TempBoldText>{`${item.max.toFixed(1)}°`}</TempBoldText>
-								</Row>
-							}
-						/>
-						<SectionHeader>
-							Hourly
-						</SectionHeader>
-						<List
-							data={data.hourly}
-							renderItem={(item, index) =>
-								<Row key={index}>
-									<DateText>{moment.unix(item.dt).format('ddd ha')}</DateText>
-									<TempText>{`${item.temp.toFixed(1)}°`}</TempText>
 								</Row>
 							}
 						/>
