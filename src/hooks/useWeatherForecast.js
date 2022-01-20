@@ -27,5 +27,5 @@ export const useWeatherForecast = (lat, lon) => {
 		fetchData()
 	}, [lat, lon])
 
-	return [isLoading, data, errorMsg]
+	return [isLoading, data, errorMsg, fetchData]
 }

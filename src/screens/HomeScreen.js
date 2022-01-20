@@ -5,6 +5,7 @@ import {
 	useSelector,
 } from 'react-redux'
 import moment from 'moment'
+import { RefreshControl } from 'react-native'
 
 import { useWeatherForecast } from '../hooks'
 import {
@@ -57,7 +58,7 @@ export const HomeScreen = (props) => {
 	const { navigation } = props
 
 	const suburb = useSelector(state => state.suburb, shallowEqual)
-	const [isLoading, data, errorMsg] = useWeatherForecast(suburb.lat, suburb.lon)
+	const [isLoading, data, errorMsg, fetchData] = useWeatherForecast(suburb.lat, suburb.lon)
 
 	return (
 		<>
@@ -72,7 +73,14 @@ export const HomeScreen = (props) => {
 					<StyledMenuIcon />
 				</Button>
 			</Header>
-			<Main>
+			<Main
+				refreshControl={
+					<RefreshControl
+						refreshing={isLoading}
+						onRefresh={fetchData}
+					/>
+				}
+			>
 				{
 					errorMsg &&
 					<ErrorAlert>{errorMsg}</ErrorAlert>
