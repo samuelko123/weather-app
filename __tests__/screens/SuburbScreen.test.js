@@ -54,7 +54,7 @@ describe('happy path', () => {
 		)
 
 		// Act
-		const btn = await screen.findByA11yLabel('Close')
+		const btn = await screen.findByA11yLabel('Go back')
 		fireEvent.press(btn)
 
 		// Assert

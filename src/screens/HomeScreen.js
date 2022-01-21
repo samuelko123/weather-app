@@ -1,14 +1,15 @@
 import React from 'react'
-import styled from 'styled-components/native'
+import { useTheme } from 'styled-components/native'
+import { ScrollView } from 'react-native'
 import {
 	shallowEqual,
 	useSelector,
 } from 'react-redux'
-import moment from 'moment'
 import {
-	RefreshControl,
-	ScrollView,
-} from 'react-native'
+	AntDesign,
+	MaterialCommunityIcons,
+} from '@expo/vector-icons'
+import moment from 'moment'
 
 import { useWeatherForecast } from '../hooks'
 import {
@@ -19,63 +20,52 @@ import {
 	Header,
 	List,
 	Main,
-	MenuIcon,
+	RefreshControl,
 	Row,
-	SearchIcon,
 	SectionHeader,
-	Spinner,
+	Surface,
 	Title,
-	WeatherIcon,
 } from '../components'
-
-const StyledTitleContainer = styled.View`
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-`
-
-const StyledSearchIcon = styled(SearchIcon)`
-	padding-left: ${props => props.theme.base.spacing * 2}px;
-	margin-right: ${props => props.theme.base.spacing * 0.5}px;
-`
-
-const StyledMenuIcon = styled(MenuIcon)`
-	padding-left: ${props => props.theme.base.spacing * 2}px;
-	padding-right: ${props => props.theme.base.spacing * 2}px;
-`
-
-const DateText = styled(BaseText)`
-    flex: 1;
-`
-
-const TempText = styled(BaseText)`
-    flex: 1;
-	text-align: right;
-`
-
-const TempBoldText = styled(BaseText)`
-    flex: 1;
-	text-align: right;
-	font-weight: bold;
-`
 
 export const HomeScreen = (props) => {
 	const { navigation } = props
 
 	const suburb = useSelector(state => state.suburb, shallowEqual)
 	const [isLoading, data, errorMsg, fetchData] = useWeatherForecast(suburb.lat, suburb.lon)
+	const theme = useTheme()
 
 	return (
 		<>
 			<Header>
-				<Button onPress={() => navigation.navigate('Suburb')}>
-					<StyledTitleContainer>
-						<StyledSearchIcon />
+				<Button
+					onPress={() => navigation.navigate('Suburb')}
+					hitSlop={theme.base.spacing * 2}
+					accessible={true}
+					accessibilityLabel='Search'
+					accessibilityHint='Navigates to the search screen'
+				>
+					<Row padding={0.1}>
+						<AntDesign
+							name='search1'
+							color={theme.color.onPrimary}
+							size={theme.base.iconSize}
+							style={{ marginRight: theme.base.spacing * 0.5 }}
+						/>
 						<Title>{suburb.name}</Title>
-					</StyledTitleContainer>
+					</Row>
 				</Button>
-				<Button onPress={() => navigation.navigate('Settings')}>
-					<StyledMenuIcon />
+				<Button
+					onPress={() => navigation.navigate('Settings')}
+					hitSlop={theme.base.spacing * 2}
+					accessible={true}
+					accessibilityLabel='Settings'
+					accessibilityHint='Navigates to the settings screen'
+				>
+					<AntDesign
+						name='setting'
+						color={theme.color.onPrimary}
+						size={theme.base.iconSize}
+					/>
 				</Button>
 			</Header>
 			<Main
@@ -91,59 +81,115 @@ export const HomeScreen = (props) => {
 					<ErrorAlert>{errorMsg}</ErrorAlert>
 				}
 				{
-					isLoading &&
-					<Spinner />
-				}
-				{
 					!errorMsg && !isLoading &&
 					<>
 						<SectionHeader>
-							Current
+							Current Weather
 						</SectionHeader>
-						<List
-							data={[data.current]}
-							renderItem={(item, index) =>
-								<Row key={index}>
-									<DateText>{moment.unix(item.dt).format('hh:mm a')}</DateText>
-									<TempText>{`${item.temp.toFixed(1)}°`}</TempText>
-								</Row>
-							}
-						/>
+						<Surface>
+							<List
+								data={[data.current]}
+								renderItem={(item, index) =>
+									<Row key={index}>
+										<BaseText
+											color={theme.color.textOnSurface}
+											flex={1}
+										>
+											{moment.unix(item.dt).format('hh:mm a')}
+										</BaseText>
+										<BaseText
+											color={theme.color.textOnSurface}
+											flex={1}
+											textAlign='right'
+										>
+											{`${item.temp.toFixed(1)}°`}
+										</BaseText>
+									</Row>
+								}
+							/>
+						</Surface>
 						<SectionHeader>
-							Hourly
+							Hourly Forecast
 						</SectionHeader>
-						<ScrollView
-							horizontal={true}
-							showsHorizontalScrollIndicator={true}
-							pagingEnabled={false}
-						>
-							{data.hourly.map((item, index) =>
-								<Card
-									key={index}
-									width={72}
-									height={144}
-								>
-									<BaseText>{moment.unix(item.dt).format('ddd')}</BaseText>
-									<BaseText>{moment.unix(item.dt).format('ha')}</BaseText>
-									<WeatherIcon name={item.icon} />
-									<BaseText>{`${item.temp.toFixed(1)}°`}</BaseText>
-								</Card>
-							)}
-						</ScrollView>
+						<Surface>
+							<ScrollView
+								horizontal={true}
+								showsHorizontalScrollIndicator={true}
+								pagingEnabled={false}
+								contentContainerStyle={{ flexGrow: 1 }}
+							>
+								<List
+									horizontal={true}
+									data={data.hourly}
+									renderItem={(item, index) =>
+										<Card
+											key={index}
+											width={theme.base.spacing * 6}
+											height={theme.base.spacing * 12}
+										>
+											<BaseText
+												color={theme.color.textOnSurface}
+											>
+												{moment.unix(item.dt).format('ddd')}
+											</BaseText>
+											<BaseText
+												color={theme.color.textOnSurface}
+											>
+												{moment.unix(item.dt).format('ha')}
+											</BaseText>
+											<MaterialCommunityIcons
+												name={item.icon}
+												color={theme.color.iconOnSurface}
+												size={theme.base.iconSize * 1.5}
+											/>
+											<BaseText
+												color={theme.color.textOnSurface}
+											>
+												{`${item.temp.toFixed(1)}°`}
+											</BaseText>
+										</Card>
+									}
+								/>
+							</ScrollView>
+						</Surface>
 						<SectionHeader>
-							Daily
+							Daily Forecast
 						</SectionHeader>
-						<List
-							data={data.daily}
-							renderItem={(item, index) =>
-								<Row key={index}>
-									<DateText>{moment.unix(item.dt).format('ddd')}</DateText>
-									<WeatherIcon name={item.icon} />
-									<TempText>{`${item.min.toFixed(1)}°`}</TempText>
-									<TempBoldText>{`${item.max.toFixed(1)}°`}</TempBoldText>
-								</Row>
-							}
-						/>
+						<Surface>
+							<List
+								data={data.daily}
+								renderItem={(item, index) =>
+									<Row key={index}>
+										<BaseText
+											color={theme.color.textOnSurface}
+											flex={1}
+										>
+											{moment.unix(item.dt).format('ddd')}
+										</BaseText>
+										<MaterialCommunityIcons
+											name={item.icon}
+											color={theme.color.iconOnSurface}
+											size={theme.base.iconSize * 1.5}
+										/>
+										<BaseText
+											color={theme.color.textOnSurface}
+											flex={1}
+											textAlign='right'
+										>
+											{`${item.min.toFixed(1)}°`}
+										</BaseText>
+										<BaseText
+											color={theme.color.textOnSurface}
+											flex={1}
+											textAlign='right'
+											bold={true}
+										>
+											{`${item.max.toFixed(1)}°`}
+										</BaseText>
+									</Row>
+								}
+							/>
+						</Surface>
 					</>
 				}
 			</Main>

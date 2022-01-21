@@ -3,18 +3,26 @@ import { Pressable } from 'react-native'
 
 export const Button = (props) => {
 	const {
-		onPress,
 		children,
+		...btnProps
 	} = props
 
 	const [opacity, setOpacity] = useState(1)
 
+	const handlePressIn = () => {
+		setOpacity(0.5)
+	}
+
+	const handlePressOut = () => {
+		setOpacity(1)
+	}
+
 	return (
 		<Pressable
-			onPress={onPress}
-			onPressIn={() => setOpacity(0.5)}
-			onPressOut={() => setOpacity(1)}
+			{...btnProps}
 			opacity={opacity}
+			onPressIn={handlePressIn}
+			onPressOut={handlePressOut}
 		>
 			{children}
 		</Pressable>

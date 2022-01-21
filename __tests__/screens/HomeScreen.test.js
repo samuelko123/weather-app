@@ -26,6 +26,10 @@ describe('happy path', () => {
 							dt: 1000000000,
 							temp: 0,
 						},
+						{
+							dt: 1000000001,
+							temp: 0,
+						},
 					],
 					daily: [
 						{
@@ -83,7 +87,7 @@ describe('happy path', () => {
 		)
 
 		// Act
-		const btn = await screen.findByA11yLabel('Menu Button')
+		const btn = await screen.findByA11yLabel('Settings')
 		fireEvent.press(btn)
 
 		// Assert

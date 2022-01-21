@@ -1,44 +1,31 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/native'
+import { useTheme } from 'styled-components/native'
 import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
+import { AntDesign } from '@expo/vector-icons'
 
 import { setSuburb } from '../redux/slices'
 import { useSuburbSearch } from '../hooks'
 import {
 	BaseText,
 	Button,
-	CloseIcon,
 	ErrorAlert,
 	Header,
 	List,
 	Main,
-	RightArrowIcon,
 	Row,
 	SectionHeader,
 	Spinner,
+	Surface,
 	TextField,
 } from '../components'
-
-const StyledTextField = styled(TextField)`
-	margin-left: ${props => props.theme.base.spacing * 2}px;
-	flex: 1;
-`
-
-const StyledCloseIcon = styled(CloseIcon)`
-	padding-left: ${props => props.theme.base.spacing * 0.5}px;
-	padding-right: ${props => props.theme.base.spacing * 2}px;
-`
-
-const SmallText = styled(BaseText)`
-	font-size: ${props => props.theme.base.fontSize / 1.5}px;
-`
 
 export const SuburbScreen = (props) => {
 	const { navigation } = props
 	const [keyword, setKeyword] = useState('')
 	const [isLoading, data, errorMsg] = useSuburbSearch(keyword)
 	const dispatch = useDispatch()
+	const theme = useTheme()
 
 	const handleChange = (text) => setKeyword(text)
 	const handlePress = (item) => {
@@ -49,24 +36,32 @@ export const SuburbScreen = (props) => {
 	return (
 		<>
 			<Header>
-				<StyledTextField
+				<TextField
 					value={keyword}
 					onChangeText={handleChange}
 					autoFocus={true}
 					placeholder='Search postcode/suburb'
 					accessibilityRole='search'
 				/>
-				<Button onPress={() => navigation.navigate('Home')}>
-					<StyledCloseIcon />
+				<Button
+					onPress={() => navigation.navigate('Home')}
+					hitSlop={theme.base.spacing * 2}
+					style={{ marginLeft: theme.base.spacing * 2 }}
+					accessible={true}
+					accessibilityLabel='Go back'
+					accessibilityHint='Navigates to the home screen'
+				>
+					<AntDesign
+						name='close'
+						color={theme.color.onPrimary}
+						size={theme.base.iconSize}
+					/>
 				</Button>
 			</Header>
 			<Main
 				keyboardDismissMode='on-drag'
 				keyboardShouldPersistTaps='handled'
 			>
-				<SectionHeader>
-					Locations
-				</SectionHeader>
 				{
 					errorMsg &&
 					<ErrorAlert>{errorMsg}</ErrorAlert>
@@ -76,30 +71,52 @@ export const SuburbScreen = (props) => {
 					<Spinner />
 				}
 				{
-					!errorMsg && !isLoading &&
-					<List
-						data={data}
-						renderItem={(item, index) => (
-							<Button
-								key={index}
-								onPress={() => {
-									handlePress(item)
-								}}
-							>
-								<Row>
-									<View>
-										<BaseText>
-											{item.name}
-										</BaseText>
-										<SmallText>
-											{`${item.postcode}, ${item.state}`}
-										</SmallText>
-									</View>
-									<RightArrowIcon />
-								</Row>
-							</Button>
-						)}
-					/>
+					!errorMsg && !isLoading && (!data || data.length === 0) &&
+					<BaseText style={{ marginTop: theme.base.spacing }}>
+						No results found
+					</BaseText>
+				}
+				{
+					!errorMsg && !isLoading && !!data && data.length > 0 &&
+					<>
+						<SectionHeader>
+							Locations
+						</SectionHeader>
+						<Surface>
+							<List
+								data={data}
+								renderItem={(item, index) => (
+									<Button
+										key={index}
+										onPress={() => {
+											handlePress(item)
+										}}
+									>
+										<Row>
+											<View>
+												<BaseText
+													color={theme.color.textOnSurface}
+												>
+													{item.name}
+												</BaseText>
+												<BaseText
+													color={theme.color.textOnSurface}
+													size={theme.base.fontSize * 0.75}
+												>
+													{`${item.postcode}, ${item.state}`}
+												</BaseText>
+											</View>
+											<AntDesign
+												name='right'
+												color={theme.color.iconOnSurface}
+												size={theme.base.iconSize}
+											/>
+										</Row>
+									</Button>
+								)}
+							/>
+						</Surface>
+					</>
 				}
 			</Main>
 		</>

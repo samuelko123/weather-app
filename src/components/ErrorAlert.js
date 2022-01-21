@@ -4,6 +4,7 @@ import { BaseText } from './BaseText'
 
 export const Container = styled.View`
     background-color: ${props => props.theme.color.error};
+	margin: ${props => props.theme.base.spacing}px;
     padding: ${props => props.theme.base.spacing}px;
     border-width: ${props => props.theme.base.borderWidth}px;
 	border-color: ${props => props.theme.color.onError};

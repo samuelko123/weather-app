@@ -1,43 +1,33 @@
 import React from 'react'
-import styled from 'styled-components/native'
+import { useTheme } from 'styled-components/native'
 import {
 	shallowEqual,
 	useDispatch,
 	useSelector,
 } from 'react-redux'
+import {
+	AntDesign,
+	MaterialCommunityIcons,
+} from '@expo/vector-icons'
 
 import { setTheme } from '../redux/slices'
 import {
 	BaseText,
 	Button,
-	CheckIcon,
-	CloseIcon,
 	Header,
 	List,
 	Main,
 	Row,
 	SectionHeader,
+	Surface,
 	Title,
 } from '../components'
-
-const StyledTitle = styled(Title)`
-	margin-left: ${props => props.theme.base.spacing * 2}px;
-	flex: 1;
-`
-
-const StyledCloseIcon = styled(CloseIcon)`
-	padding-left: ${props => props.theme.base.spacing * 0.5}px;
-	padding-right: ${props => props.theme.base.spacing * 2}px;
-`
-
-const StyledText = styled(BaseText)`
-	color: ${props => props.theme.color.textOnSurface};
-`
 
 export const SettingsScreen = (props) => {
 	const { navigation } = props
 	const currentTheme = useSelector(state => state.theme, shallowEqual)
 	const dispatch = useDispatch()
+	const theme = useTheme()
 	const data = ['Light', 'Dark']
 
 	const handlePress = (item) => {
@@ -47,32 +37,52 @@ export const SettingsScreen = (props) => {
 	return (
 		<>
 			<Header>
-				<StyledTitle>Settings</StyledTitle>
-				<Button onPress={() => navigation.navigate('Home')}>
-					<StyledCloseIcon />
+				<Title>Settings</Title>
+				<Button
+					onPress={() => navigation.navigate('Home')}
+					hitSlop={theme.base.spacing * 2}
+					accessible={true}
+					accessibilityLabel='Go back'
+					accessibilityHint='Navigates to the home screen'
+				>
+					<AntDesign
+						name='close'
+						color={theme.color.onPrimary}
+						size={theme.base.iconSize}
+					/>
 				</Button>
 			</Header>
 			<Main>
-				<SectionHeader>Theme</SectionHeader>
-				<List
-					data={data}
-					renderItem={(item, index) => (
-						<Button
-							key={index}
-							onPress={() => handlePress(item)}
-						>
-							<Row>
-								<StyledText>
-									{item}
-								</StyledText>
-								{
-									item.toLowerCase() === currentTheme.name &&
-									<CheckIcon />
-								}
-							</Row>
-						</Button>
-					)}
-				/>
+				<SectionHeader>
+					Theme
+				</SectionHeader>
+				<Surface>
+					<List
+						data={data}
+						renderItem={(item, index) => (
+							<Button
+								key={index}
+								onPress={() => handlePress(item)}
+							>
+								<Row>
+									<BaseText
+										color={theme.color.textOnSurface}
+									>
+										{item}
+									</BaseText>
+									{
+										item.toLowerCase() === currentTheme.name &&
+										<MaterialCommunityIcons
+											name='check'
+											color={theme.color.iconOnSurface}
+											size={theme.base.iconSize}
+										/>
+									}
+								</Row>
+							</Button>
+						)}
+					/>
+				</Surface>
 			</Main>
 		</>
 	)
