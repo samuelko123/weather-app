@@ -139,7 +139,7 @@ export const HomeScreen = (props) => {
 												{moment.unix(item.dt).format('ha')}
 											</BaseText>
 											<MaterialCommunityIcons
-												name={item.icon}
+												name={item.weather_icon}
 												color={theme.color.iconOnSurface}
 												size={theme.base.iconSize * 1.5}
 											/>
@@ -168,7 +168,7 @@ export const HomeScreen = (props) => {
 											{moment.unix(item.dt).format('ddd')}
 										</BaseText>
 										<MaterialCommunityIcons
-											name={item.icon}
+											name={item.weather_icon}
 											color={theme.color.iconOnSurface}
 											size={theme.base.iconSize * 1.5}
 										/>
@@ -177,7 +177,7 @@ export const HomeScreen = (props) => {
 											flex={1}
 											textAlign='right'
 										>
-											{`${item.min.toFixed(1)}°`}
+											{`${item.temp_min.toFixed(1)}°`}
 										</BaseText>
 										<BaseText
 											color={theme.color.textOnSurface}
@@ -185,7 +185,7 @@ export const HomeScreen = (props) => {
 											textAlign='right'
 											bold={true}
 										>
-											{`${item.max.toFixed(1)}°`}
+											{`${item.temp_max.toFixed(1)}°`}
 										</BaseText>
 									</Row>
 								}
