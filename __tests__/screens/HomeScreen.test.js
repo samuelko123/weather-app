@@ -34,13 +34,13 @@ describe('happy path', () => {
 					daily: [
 						{
 							dt: 1000000000,
-							min: 22.01,
-							max: 30.99,
+							temp_min: 22.01,
+							temp_max: 30.99,
 						},
 						{
 							dt: 1000000001,
-							min: 15,
-							max: 20,
+							temp_min: 15,
+							temp_max: 20,
 						},
 					],
 				},
