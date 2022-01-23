@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { Pressable } from 'react-native'
+import styled from 'styled-components/native'
+import { marginStyle } from '../styles'
+
+const StyledPressable = styled.Pressable`
+	${marginStyle}
+`
 
 export const Button = (props) => {
 	const {
@@ -18,13 +23,13 @@ export const Button = (props) => {
 	}
 
 	return (
-		<Pressable
+		<StyledPressable
 			{...btnProps}
 			opacity={opacity}
 			onPressIn={handlePressIn}
 			onPressOut={handlePressOut}
 		>
 			{children}
-		</Pressable>
+		</StyledPressable>
 	)
 }

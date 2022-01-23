@@ -49,9 +49,10 @@ export const HomeScreen = (props) => {
 							name='search1'
 							color={theme.color.onPrimary}
 							size={theme.base.iconSize}
-							style={{ marginRight: theme.base.spacing * 0.5 }}
 						/>
-						<Title>{suburb.name}</Title>
+						<Title ml={0.5}>
+							{suburb.name}
+						</Title>
 					</Row>
 				</Button>
 				<Button

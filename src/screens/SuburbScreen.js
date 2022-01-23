@@ -46,7 +46,7 @@ export const SuburbScreen = (props) => {
 				<Button
 					onPress={() => navigation.navigate('Home')}
 					hitSlop={theme.base.spacing * 2}
-					style={{ marginLeft: theme.base.spacing * 2 }}
+					ml={2}
 					accessible={true}
 					accessibilityLabel='Go back'
 					accessibilityHint='Navigates to the home screen'
@@ -72,7 +72,7 @@ export const SuburbScreen = (props) => {
 				}
 				{
 					!errorMsg && !isLoading && (!data || data.length === 0) &&
-					<BaseText style={{ marginTop: theme.base.spacing }}>
+					<BaseText mt={1}>
 						No results found
 					</BaseText>
 				}
