@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
+import { spacing } from '../styles'
 
-export const Row = styled.View`
-    padding: ${props => props.padding !== undefined ? props.padding : props.theme.base.spacing}px;
+export const Row = styled.View`   
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    ${spacing}
 `

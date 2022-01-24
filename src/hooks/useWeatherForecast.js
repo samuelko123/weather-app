@@ -6,7 +6,7 @@ import axios from 'axios'
 
 export const useWeatherForecast = (lat, lon) => {
 	const [isLoading, setIsLoading] = useState(true)
-	const [data, setData] = useState([])
+	const [data, setData] = useState(null)
 	const [errorMsg, setErrorMsg] = useState(null)
 
 	const fetchData = async () => {

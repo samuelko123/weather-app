@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components/native'
-import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { AntDesign } from '@expo/vector-icons'
 
@@ -9,6 +8,7 @@ import { useSuburbSearch } from '../hooks'
 import {
 	BaseText,
 	Button,
+	Col,
 	ErrorAlert,
 	Header,
 	List,
@@ -92,20 +92,18 @@ export const SuburbScreen = (props) => {
 											handlePress(item)
 										}}
 									>
-										<Row>
-											<View>
-												<BaseText
-													color={theme.color.textOnSurface}
-												>
+										<Row p={1}>
+											<Col flex={1}>
+												<BaseText color={theme.color.textOnSurface}>
 													{item.name}
 												</BaseText>
 												<BaseText
 													color={theme.color.textOnSurface}
-													size={theme.base.fontSize * 0.75}
+													size={0.75}
 												>
 													{`${item.postcode}, ${item.state}`}
 												</BaseText>
-											</View>
+											</Col>
 											<AntDesign
 												name='right'
 												color={theme.color.iconOnSurface}

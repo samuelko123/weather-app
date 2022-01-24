@@ -11,11 +11,15 @@ import {
 } from '@expo/vector-icons'
 import moment from 'moment'
 
-import { useWeatherForecast } from '../hooks'
+import {
+	useLastUpdatedDesc,
+	useWeatherForecast,
+} from '../hooks'
 import {
 	BaseText,
 	Button,
 	Card,
+	Col,
 	ErrorAlert,
 	Header,
 	List,
@@ -26,12 +30,17 @@ import {
 	Surface,
 	Title,
 } from '../components'
+import {
+	formatTemperature,
+	formatWind,
+} from '../utils'
 
 export const HomeScreen = (props) => {
 	const { navigation } = props
 
 	const suburb = useSelector(state => state.suburb, shallowEqual)
 	const [isLoading, data, errorMsg, fetchData] = useWeatherForecast(suburb.lat, suburb.lon)
+	const [lastUpdated] = useLastUpdatedDesc(data ? data.current.dt : 0)
 	const theme = useTheme()
 
 	return (
@@ -44,7 +53,7 @@ export const HomeScreen = (props) => {
 					accessibilityLabel='Search'
 					accessibilityHint='Navigates to the search screen'
 				>
-					<Row padding={0.1}>
+					<Row>
 						<AntDesign
 							name='search1'
 							color={theme.color.onPrimary}
@@ -87,27 +96,101 @@ export const HomeScreen = (props) => {
 						<SectionHeader>
 							Current Weather
 						</SectionHeader>
-						<Surface>
-							<List
-								data={[data.current]}
-								renderItem={(item, index) =>
-									<Row key={index}>
-										<BaseText
-											color={theme.color.textOnSurface}
-											flex={1}
-										>
-											{moment.unix(item.dt).format('hh:mm a')}
+						<Row>
+							<Col flex={1}>
+								<Row>
+									<Col center={true}>
+										<BaseText size={2}>
+											{formatTemperature(data.current.temp, 1)}
 										</BaseText>
-										<BaseText
-											color={theme.color.textOnSurface}
-											flex={1}
-											textAlign='right'
-										>
-											{`${item.temp.toFixed(1)}°`}
+										<BaseText size={0.75}>
+											Feels like {formatTemperature(data.current.temp_feels_like, 1)}
 										</BaseText>
-									</Row>
-								}
-							/>
+									</Col>
+								</Row>
+								<Row mt={0.5}>
+									<Col center={true}>
+										<BaseText bold={true}>
+											{formatTemperature(data.daily[0].temp_max)}
+										</BaseText>
+										<BaseText bold={true}>
+											Max
+										</BaseText>
+									</Col>
+									<Col center={true} ml={1}>
+										<BaseText>
+											{formatTemperature(data.daily[0].temp_min)}
+										</BaseText>
+										<BaseText>
+											Min
+										</BaseText>
+									</Col>
+								</Row>
+							</Col>
+							<Col flex={1}>
+								<Row>
+									<MaterialCommunityIcons
+										name={data.current.weather_icon}
+										color={theme.color.iconOnBackground}
+										size={theme.base.iconSize * 3}
+									/>
+								</Row>
+								<Row>
+									<BaseText size={1.5}>
+										{data.current.weather_short_desc}
+									</BaseText>
+								</Row>
+							</Col>
+						</Row>
+						<Surface mt={1} pt={0.5}>
+							<Row px={1} pb={0.5}>
+								<BaseText flex={1} size={0.9}>
+									Humidity
+								</BaseText>
+								<BaseText flex={1} size={0.9}>
+									{data.current.humidity}%
+								</BaseText>
+							</Row>
+							<Row px={1} pb={0.5}>
+								<BaseText flex={1} size={0.9}>
+									Wind
+								</BaseText>
+								<BaseText flex={1} size={0.9}>
+									{formatWind(data.current.wind_speed)}
+								</BaseText>
+							</Row>
+							<Row px={1} pb={0.5}>
+								<BaseText flex={1} size={0.9}>
+									Gust
+								</BaseText>
+								<BaseText flex={1} size={0.9}>
+									{formatWind(data.current.wind_gust)}
+								</BaseText>
+							</Row>
+							<Row px={1} pb={0.5}>
+								<BaseText flex={1} size={0.9}>
+									UV Index
+								</BaseText>
+								<BaseText flex={1} size={0.9}>
+									{data.current.uv_index}
+								</BaseText>
+							</Row>
+							<Row px={1} pb={0.5}>
+								<BaseText flex={1} size={0.9}>
+									Sunrise
+								</BaseText>
+								<BaseText flex={1} size={0.9}>
+									{moment.unix(data.current.sunrise).format('h:mma')}
+								</BaseText>
+							</Row>
+							<Row px={1} pb={0.5}>
+								<BaseText flex={1} size={0.9}>
+									Sunset
+								</BaseText>
+								<BaseText flex={1} size={0.9}>
+									{moment.unix(data.current.sunset).format('h:mma')}
+								</BaseText>
+							</Row>
 						</Surface>
 						<SectionHeader>
 							Hourly Forecast
@@ -121,7 +204,7 @@ export const HomeScreen = (props) => {
 							>
 								<List
 									horizontal={true}
-									data={data.hourly}
+									data={data.hourly.slice(1)}
 									renderItem={(item, index) =>
 										<Card
 											key={index}
@@ -146,7 +229,7 @@ export const HomeScreen = (props) => {
 											<BaseText
 												color={theme.color.textOnSurface}
 											>
-												{`${item.temp.toFixed(1)}°`}
+												{formatTemperature(item.temp)}
 											</BaseText>
 										</Card>
 									}
@@ -158,9 +241,9 @@ export const HomeScreen = (props) => {
 						</SectionHeader>
 						<Surface>
 							<List
-								data={data.daily}
+								data={data.daily.slice(1)}
 								renderItem={(item, index) =>
-									<Row key={index}>
+									<Row p={1} key={index}>
 										<BaseText
 											color={theme.color.textOnSurface}
 											flex={1}
@@ -177,7 +260,7 @@ export const HomeScreen = (props) => {
 											flex={1}
 											textAlign='right'
 										>
-											{`${item.temp_min.toFixed(1)}°`}
+											{formatTemperature(item.temp_min)}
 										</BaseText>
 										<BaseText
 											color={theme.color.textOnSurface}
@@ -185,12 +268,18 @@ export const HomeScreen = (props) => {
 											textAlign='right'
 											bold={true}
 										>
-											{`${item.temp_max.toFixed(1)}°`}
+											{formatTemperature(item.temp_max)}
 										</BaseText>
 									</Row>
 								}
 							/>
 						</Surface>
+						<BaseText
+							mt={2}
+							size={0.75}
+						>
+							Last updated {lastUpdated}
+						</BaseText>
 					</>
 				}
 			</Main>

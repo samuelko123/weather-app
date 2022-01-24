@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/native'
-import { marginStyle } from '../styles'
+import { spacing } from '../styles'
 
 const StyledPressable = styled.Pressable`
-	${marginStyle}
+	${spacing}
 `
 
 export const Button = (props) => {

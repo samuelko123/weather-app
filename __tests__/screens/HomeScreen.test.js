@@ -18,8 +18,9 @@ describe('happy path', () => {
 			return Promise.resolve({
 				data: {
 					current: {
-						dt: 1000000000,
+						dt: global.timestamp,
 						temp: 0,
+						wind_speed: 1,
 					},
 					hourly: [
 						{
@@ -28,6 +29,10 @@ describe('happy path', () => {
 						},
 						{
 							dt: 1000000001,
+							temp: 0,
+						},
+						{
+							dt: 1000000002,
 							temp: 0,
 						},
 					],
@@ -58,8 +63,8 @@ describe('happy path', () => {
 
 		// Assert
 		expect(await screen.findByA11yLabel('Search')).toBeTruthy()
-		expect(screen.getByText('22.0°')).toBeTruthy()
-		expect(screen.getByText('31.0°')).toBeTruthy()
+		expect(screen.getByText('22°')).toBeTruthy()
+		expect(screen.getByText('31°')).toBeTruthy()
 	})
 
 	test('navigate to suburb screen', async () => {

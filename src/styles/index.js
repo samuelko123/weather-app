@@ -1,4 +1,4 @@
-export { marginStyle } from './margin'
+export { spacing } from './spacing'
 export {
 	lightTheme,
 	darkTheme, 

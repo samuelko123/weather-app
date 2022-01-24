@@ -64,9 +64,10 @@ export const SettingsScreen = (props) => {
 								key={index}
 								onPress={() => handlePress(item)}
 							>
-								<Row>
+								<Row p={1}>
 									<BaseText
 										color={theme.color.textOnSurface}
+										flex={1}
 									>
 										{item}
 									</BaseText>

@@ -1,4 +1,5 @@
 export { BaseText } from './BaseText'
+export { Col } from './Col'
 export { Button } from './Button'
 export { Card } from './Card'
 export { ErrorAlert } from './ErrorAlert'
