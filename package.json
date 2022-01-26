@@ -34,6 +34,7 @@
     "@babel/core": "^7.12.9",
     "@babel/eslint-parser": "^7.16.5",
     "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/react-native": "^9.0.0",
     "babel-jest": "^27.4.6",
     "codecov": "^3.8.3",

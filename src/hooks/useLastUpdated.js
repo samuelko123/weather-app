@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-export const useLastUpdatedDesc = (dt) => {
+export const useLastUpdated = (dt) => {
 	const [desc, setDesc] = React.useState(0)
 
 	React.useEffect(() => {

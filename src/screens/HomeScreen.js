@@ -12,7 +12,7 @@ import {
 import moment from 'moment'
 
 import {
-	useLastUpdatedDesc,
+	useLastUpdated,
 	useWeatherForecast,
 } from '../hooks'
 import {
@@ -40,7 +40,7 @@ export const HomeScreen = (props) => {
 
 	const suburb = useSelector(state => state.suburb, shallowEqual)
 	const [isLoading, data, errorMsg, fetchData] = useWeatherForecast(suburb.lat, suburb.lon)
-	const [lastUpdated] = useLastUpdatedDesc(data ? data.current.dt : 0)
+	const [lastUpdated] = useLastUpdated(data ? data.current.dt : 0)
 	const theme = useTheme()
 
 	return (
